@@ -1,0 +1,143 @@
+//
+//  Utils.m
+//  FirstQ
+//
+//  Created by ChangmingNiu on 2/5/16.
+//  Copyright © 2016 EKOO LAB PTE. LTD. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "Utils.h"
+#import "ConstantValues.h"
+
+@implementation Utils
+
++ (UIColor *)colorFromHexString:(NSString *)hexString {
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexString];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+}
+
++ (CGRect)screenBounds {
+    UIScreen *screen = [UIScreen mainScreen];
+    CGRect screenRect;
+    if (![screen respondsToSelector:@selector(fixedCoordinateSpace)] && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        screenRect = CGRectMake(0, 0, screen.bounds.size.height, screen.bounds.size.width);
+    } else {
+        screenRect = screen.bounds;
+    }
+    
+    return screenRect;
+}
+
++ (BOOL) IsEmpty:(id)thing {
+    return thing == nil
+    || ([thing respondsToSelector:@selector(length)]
+        && [(NSData *)thing length] == 0)
+    || ([thing respondsToSelector:@selector(count)]
+        && [(NSArray *)thing count] == 0)
+    || [thing isEqual: [NSNull null]];
+}
+
++ (BOOL)isValidEmail:(NSString *) emailStr{
+    BOOL stricterFilter = NO;
+    NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
+    NSString *laxString = @"^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:emailStr];
+}
+
++ (BOOL)isNumber:(NSString *)string{
+    NSPredicate *numberPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES '^[0-9]+$'"];
+    return [numberPredicate evaluateWithObject:string];
+}
+
++ (BOOL)isSingaporeMobileNo:(NSString *)mobileNumber{
+    NSString *phoneRegex = @"^(((0|((\\+)?65([- ])?))|((\\((\\+)?65\\)([- ])?)))?[8-9]\\d{7})?$";
+    NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+    return [phoneTest evaluateWithObject:mobileNumber];
+}
+
++ (void)displayError:(NSString *)displayText{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:displayText
+                                                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+}
+
++ (NSString*) accessToken{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString * accessToken = [defaults objectForKey:@"access_token"];
+    return accessToken;
+}
+
++ (NSString*) mobile{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString * mobile = [defaults objectForKey:@"mobile"];
+    return mobile;
+}
+
++ (NSString *) getDateStringByDate: (NSDate*) date{
+    NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
+    [dateFormater setDateFormat:@"yyyy-MM-dd"];
+    return [dateFormater stringFromDate:date];
+}
+
++ (NSDate *) getDateByDateString: (NSString*) dateString{
+    NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
+    [dateFormater setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSDate *date = [dateFormater dateFromString:dateString];
+    return date;
+}
+
++ (NSString *) getDateTimeStringByDate: (NSDate*) date{
+    NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
+    [dateFormater setDateFormat:@"yyyy-MM-dd HH:mm"];
+    [dateFormater setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    return [dateFormater stringFromDate:date];
+}
+
++ (NSDate *) getLocalDateFrom:(NSDate *) date{
+    NSDateFormatter * format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSTimeZone *currentTimeZone = [NSTimeZone localTimeZone];
+    NSTimeZone *utcTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+    NSInteger currentGMTOffset = [currentTimeZone secondsFromGMTForDate:date];
+    NSInteger gmtOffset = [utcTimeZone secondsFromGMTForDate:date];
+    NSTimeInterval gmtInterval = currentGMTOffset - gmtOffset;
+    NSDate *destinationDate = [[NSDate alloc] initWithTimeInterval:gmtInterval sinceDate:date];
+    return destinationDate;
+}
+
++(NSString *) getTimeString: (NSDate*) date{
+    NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
+    [dateFormater setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [dateFormater setDateFormat:@"HH:mm"];
+    
+    return [dateFormater stringFromDate:date];
+}
+
++(NSString *) getReadableDateString:(NSDate*) date{
+    NSDateFormatter * format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"EEE, MMM d - HH:mm"];
+    return [format stringFromDate:date];
+}
+
++(bool) isSingaporeIC:(NSString *)ic{
+    NSString *phoneRegex = @"^[STFG]\\d{7}[A-Z]$";
+    NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+    return [phoneTest evaluateWithObject:ic];
+}
+
++(NSDate*) getStartDate: (NSDate *) date{
+    NSCalendar * gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    [gregorian setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    NSDateComponents *components = [gregorian components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:[NSDate date]];
+    [components setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    return [gregorian dateFromComponents:components];
+}
+
+
+@end

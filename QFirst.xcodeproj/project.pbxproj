@@ -7,27 +7,140 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F35AA0ABF110E607471B062 /* Pods_QFirst.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F522DE2272FADC61A2F3F694 /* Pods_QFirst.framework */; };
 		FBE9DD431D0D08740057623B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD421D0D08740057623B /* main.m */; };
 		FBE9DD461D0D08740057623B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD451D0D08740057623B /* AppDelegate.m */; };
-		FBE9DD491D0D08740057623B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD481D0D08740057623B /* ViewController.m */; };
 		FBE9DD4C1D0D08740057623B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBE9DD4A1D0D08740057623B /* Main.storyboard */; };
-		FBE9DD4F1D0D08740057623B /* QFirst.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD4D1D0D08740057623B /* QFirst.xcdatamodeld */; };
 		FBE9DD511D0D08740057623B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBE9DD501D0D08740057623B /* Assets.xcassets */; };
 		FBE9DD541D0D08740057623B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBE9DD521D0D08740057623B /* LaunchScreen.storyboard */; };
+		FBE9DD711D0D096C0057623B /* BookHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD5C1D0D096C0057623B /* BookHistoryViewController.m */; };
+		FBE9DD721D0D096C0057623B /* BookmarkSearchResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD5E1D0D096C0057623B /* BookmarkSearchResultTableViewController.m */; };
+		FBE9DD731D0D096C0057623B /* BookmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD601D0D096C0057623B /* BookmarkViewController.m */; };
+		FBE9DD741D0D096C0057623B /* ClinicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD621D0D096C0057623B /* ClinicDetailViewController.m */; };
+		FBE9DD751D0D096C0057623B /* ClinicSearchResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD641D0D096C0057623B /* ClinicSearchResultTableViewController.m */; };
+		FBE9DD761D0D096C0057623B /* ClinicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD661D0D096C0057623B /* ClinicViewController.m */; };
+		FBE9DD771D0D096C0057623B /* DoctorDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD681D0D096C0057623B /* DoctorDetailViewController.m */; };
+		FBE9DD781D0D096C0057623B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD6A1D0D096C0057623B /* LoginViewController.m */; };
+		FBE9DD791D0D096C0057623B /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD6C1D0D096C0057623B /* MeViewController.m */; };
+		FBE9DD7A1D0D096C0057623B /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD6E1D0D096C0057623B /* QRCodeViewController.m */; };
+		FBE9DD7B1D0D096C0057623B /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD701D0D096C0057623B /* TimelineViewController.m */; };
+		FBE9DD8A1D0D0A4F0057623B /* Clinic.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD7F1D0D0A4F0057623B /* Clinic.m */; };
+		FBE9DD8B1D0D0A4F0057623B /* ClinicInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD811D0D0A4F0057623B /* ClinicInfo.m */; };
+		FBE9DD8C1D0D0A4F0057623B /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD831D0D0A4F0057623B /* Image.m */; };
+		FBE9DD8D1D0D0A4F0057623B /* Reservation.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD851D0D0A4F0057623B /* Reservation.m */; };
+		FBE9DD8E1D0D0A4F0057623B /* TimeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD871D0D0A4F0057623B /* TimeLine.m */; };
+		FBE9DD8F1D0D0A4F0057623B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD891D0D0A4F0057623B /* User.m */; };
+		FBE9DD951D0D0ABD0057623B /* qfirst.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD921D0D0ABD0057623B /* qfirst.xcdatamodeld */; };
+		FBE9DD981D0D0B040057623B /* Clinic+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD971D0D0B040057623B /* Clinic+CoreDataProperties.m */; };
+		FBE9DDA21D0D0BC70057623B /* FAImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD9C1D0D0BC70057623B /* FAImageView.m */; };
+		FBE9DDA31D0D0BC70057623B /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FBE9DD9D1D0D0BC70057623B /* FontAwesome.ttf */; };
+		FBE9DDA41D0D0BC70057623B /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD9F1D0D0BC70057623B /* NSString+FontAwesome.m */; };
+		FBE9DDA51D0D0BC70057623B /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDA11D0D0BC70057623B /* UIFont+FontAwesome.m */; };
+		FBE9DDA81D0D0BEA0057623B /* MozTopAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDA71D0D0BEA0057623B /* MozTopAlertView.m */; };
+		FBE9DDB21D0D0C320057623B /* QRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDAB1D0D0C320057623B /* QRItem.m */; };
+		FBE9DDB31D0D0C320057623B /* QRMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDAD1D0D0C320057623B /* QRMenu.m */; };
+		FBE9DDB41D0D0C320057623B /* QRUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDAF1D0D0C320057623B /* QRUtil.m */; };
+		FBE9DDB51D0D0C320057623B /* QRView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDB11D0D0C320057623B /* QRView.m */; };
+		FBE9DDB91D0D0C620057623B /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDB81D0D0C620057623B /* FXBlurView.m */; };
+		FBE9DDC81D0D0CB10057623B /* DoctorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDBC1D0D0CB10057623B /* DoctorCell.m */; };
+		FBE9DDC91D0D0CB10057623B /* DoctorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE9DDBD1D0D0CB10057623B /* DoctorCell.xib */; };
+		FBE9DDCA1D0D0CB10057623B /* PasscodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDBF1D0D0CB10057623B /* PasscodeView.m */; };
+		FBE9DDCB1D0D0CB10057623B /* PasscodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE9DDC01D0D0CB10057623B /* PasscodeView.xib */; };
+		FBE9DDCC1D0D0CB10057623B /* SignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDC21D0D0CB10057623B /* SignupView.m */; };
+		FBE9DDCD1D0D0CB10057623B /* SignupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE9DDC31D0D0CB10057623B /* SignupView.xib */; };
+		FBE9DDCE1D0D0CB10057623B /* TimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDC51D0D0CB10057623B /* TimeCell.m */; };
+		FBE9DDCF1D0D0CB10057623B /* UILabel+DynamicSize.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDC71D0D0CB10057623B /* UILabel+DynamicSize.m */; };
+		FBE9DDD41D0D0CE20057623B /* ConstantValues.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDD11D0D0CE20057623B /* ConstantValues.m */; };
+		FBE9DDD51D0D0CE20057623B /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDD31D0D0CE20057623B /* Utils.m */; };
+		FBE9DDD81D0D11010057623B /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDD61D0D11010057623B /* CoreData.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4AEF171B9F4336F1972CE758 /* Pods-QFirst.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QFirst.release.xcconfig"; path = "Pods/Target Support Files/Pods-QFirst/Pods-QFirst.release.xcconfig"; sourceTree = "<group>"; };
+		CECF10B6D318714464CB153C /* Pods-QFirst.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QFirst.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QFirst/Pods-QFirst.debug.xcconfig"; sourceTree = "<group>"; };
+		F522DE2272FADC61A2F3F694 /* Pods_QFirst.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QFirst.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBE9DD3E1D0D08740057623B /* QFirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QFirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBE9DD421D0D08740057623B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FBE9DD441D0D08740057623B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FBE9DD451D0D08740057623B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FBE9DD471D0D08740057623B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		FBE9DD481D0D08740057623B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		FBE9DD4B1D0D08740057623B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		FBE9DD4E1D0D08740057623B /* QFirst.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QFirst.xcdatamodel; sourceTree = "<group>"; };
 		FBE9DD501D0D08740057623B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FBE9DD531D0D08740057623B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FBE9DD551D0D08740057623B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FBE9DD5B1D0D096C0057623B /* BookHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookHistoryViewController.h; sourceTree = "<group>"; };
+		FBE9DD5C1D0D096C0057623B /* BookHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookHistoryViewController.m; sourceTree = "<group>"; };
+		FBE9DD5D1D0D096C0057623B /* BookmarkSearchResultTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkSearchResultTableViewController.h; sourceTree = "<group>"; };
+		FBE9DD5E1D0D096C0057623B /* BookmarkSearchResultTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkSearchResultTableViewController.m; sourceTree = "<group>"; };
+		FBE9DD5F1D0D096C0057623B /* BookmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkViewController.h; sourceTree = "<group>"; };
+		FBE9DD601D0D096C0057623B /* BookmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkViewController.m; sourceTree = "<group>"; };
+		FBE9DD611D0D096C0057623B /* ClinicDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicDetailViewController.h; sourceTree = "<group>"; };
+		FBE9DD621D0D096C0057623B /* ClinicDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicDetailViewController.m; sourceTree = "<group>"; };
+		FBE9DD631D0D096C0057623B /* ClinicSearchResultTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicSearchResultTableViewController.h; sourceTree = "<group>"; };
+		FBE9DD641D0D096C0057623B /* ClinicSearchResultTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicSearchResultTableViewController.m; sourceTree = "<group>"; };
+		FBE9DD651D0D096C0057623B /* ClinicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicViewController.h; sourceTree = "<group>"; };
+		FBE9DD661D0D096C0057623B /* ClinicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicViewController.m; sourceTree = "<group>"; };
+		FBE9DD671D0D096C0057623B /* DoctorDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorDetailViewController.h; sourceTree = "<group>"; };
+		FBE9DD681D0D096C0057623B /* DoctorDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoctorDetailViewController.m; sourceTree = "<group>"; };
+		FBE9DD691D0D096C0057623B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		FBE9DD6A1D0D096C0057623B /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		FBE9DD6B1D0D096C0057623B /* MeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
+		FBE9DD6C1D0D096C0057623B /* MeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
+		FBE9DD6D1D0D096C0057623B /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
+		FBE9DD6E1D0D096C0057623B /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
+		FBE9DD6F1D0D096C0057623B /* TimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
+		FBE9DD701D0D096C0057623B /* TimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
+		FBE9DD7E1D0D0A4F0057623B /* Clinic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clinic.h; sourceTree = "<group>"; };
+		FBE9DD7F1D0D0A4F0057623B /* Clinic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Clinic.m; sourceTree = "<group>"; };
+		FBE9DD801D0D0A4F0057623B /* ClinicInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicInfo.h; sourceTree = "<group>"; };
+		FBE9DD811D0D0A4F0057623B /* ClinicInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicInfo.m; sourceTree = "<group>"; };
+		FBE9DD821D0D0A4F0057623B /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		FBE9DD831D0D0A4F0057623B /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
+		FBE9DD841D0D0A4F0057623B /* Reservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reservation.h; sourceTree = "<group>"; };
+		FBE9DD851D0D0A4F0057623B /* Reservation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reservation.m; sourceTree = "<group>"; };
+		FBE9DD861D0D0A4F0057623B /* TimeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLine.h; sourceTree = "<group>"; };
+		FBE9DD871D0D0A4F0057623B /* TimeLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeLine.m; sourceTree = "<group>"; };
+		FBE9DD881D0D0A4F0057623B /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		FBE9DD891D0D0A4F0057623B /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		FBE9DD931D0D0ABD0057623B /* qfirst.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = qfirst.xcdatamodel; sourceTree = "<group>"; };
+		FBE9DD961D0D0B040057623B /* Clinic+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Clinic+CoreDataProperties.h"; sourceTree = "<group>"; };
+		FBE9DD971D0D0B040057623B /* Clinic+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Clinic+CoreDataProperties.m"; sourceTree = "<group>"; };
+		FBE9DD9B1D0D0BC70057623B /* FAImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAImageView.h; sourceTree = "<group>"; };
+		FBE9DD9C1D0D0BC70057623B /* FAImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAImageView.m; sourceTree = "<group>"; };
+		FBE9DD9D1D0D0BC70057623B /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		FBE9DD9E1D0D0BC70057623B /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
+		FBE9DD9F1D0D0BC70057623B /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
+		FBE9DDA01D0D0BC70057623B /* UIFont+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+FontAwesome.h"; sourceTree = "<group>"; };
+		FBE9DDA11D0D0BC70057623B /* UIFont+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FontAwesome.m"; sourceTree = "<group>"; };
+		FBE9DDA61D0D0BEA0057623B /* MozTopAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MozTopAlertView.h; sourceTree = "<group>"; };
+		FBE9DDA71D0D0BEA0057623B /* MozTopAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MozTopAlertView.m; sourceTree = "<group>"; };
+		FBE9DDAA1D0D0C320057623B /* QRItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRItem.h; sourceTree = "<group>"; };
+		FBE9DDAB1D0D0C320057623B /* QRItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRItem.m; sourceTree = "<group>"; };
+		FBE9DDAC1D0D0C320057623B /* QRMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRMenu.h; sourceTree = "<group>"; };
+		FBE9DDAD1D0D0C320057623B /* QRMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRMenu.m; sourceTree = "<group>"; };
+		FBE9DDAE1D0D0C320057623B /* QRUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRUtil.h; sourceTree = "<group>"; };
+		FBE9DDAF1D0D0C320057623B /* QRUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRUtil.m; sourceTree = "<group>"; };
+		FBE9DDB01D0D0C320057623B /* QRView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRView.h; sourceTree = "<group>"; };
+		FBE9DDB11D0D0C320057623B /* QRView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRView.m; sourceTree = "<group>"; };
+		FBE9DDB71D0D0C620057623B /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
+		FBE9DDB81D0D0C620057623B /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
+		FBE9DDBB1D0D0CB10057623B /* DoctorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorCell.h; sourceTree = "<group>"; };
+		FBE9DDBC1D0D0CB10057623B /* DoctorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoctorCell.m; sourceTree = "<group>"; };
+		FBE9DDBD1D0D0CB10057623B /* DoctorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoctorCell.xib; sourceTree = "<group>"; };
+		FBE9DDBE1D0D0CB10057623B /* PasscodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasscodeView.h; sourceTree = "<group>"; };
+		FBE9DDBF1D0D0CB10057623B /* PasscodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasscodeView.m; sourceTree = "<group>"; };
+		FBE9DDC01D0D0CB10057623B /* PasscodeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasscodeView.xib; sourceTree = "<group>"; };
+		FBE9DDC11D0D0CB10057623B /* SignupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupView.h; sourceTree = "<group>"; };
+		FBE9DDC21D0D0CB10057623B /* SignupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupView.m; sourceTree = "<group>"; };
+		FBE9DDC31D0D0CB10057623B /* SignupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignupView.xib; sourceTree = "<group>"; };
+		FBE9DDC41D0D0CB10057623B /* TimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeCell.h; sourceTree = "<group>"; };
+		FBE9DDC51D0D0CB10057623B /* TimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeCell.m; sourceTree = "<group>"; };
+		FBE9DDC61D0D0CB10057623B /* UILabel+DynamicSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+DynamicSize.h"; sourceTree = "<group>"; };
+		FBE9DDC71D0D0CB10057623B /* UILabel+DynamicSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+DynamicSize.m"; sourceTree = "<group>"; };
+		FBE9DDD01D0D0CE20057623B /* ConstantValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantValues.h; sourceTree = "<group>"; };
+		FBE9DDD11D0D0CE20057623B /* ConstantValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstantValues.m; sourceTree = "<group>"; };
+		FBE9DDD21D0D0CE20057623B /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		FBE9DDD31D0D0CE20057623B /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		FBE9DDD71D0D11010057623B /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +148,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F35AA0ABF110E607471B062 /* Pods_QFirst.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3034E1E1624DA865281FA969 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F522DE2272FADC61A2F3F694 /* Pods_QFirst.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D3BB0F5365C156607D506B62 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CECF10B6D318714464CB153C /* Pods-QFirst.debug.xcconfig */,
+				4AEF171B9F4336F1972CE758 /* Pods-QFirst.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		FBE9DD351D0D08740057623B = {
 			isa = PBXGroup;
 			children = (
 				FBE9DD401D0D08740057623B /* QFirst */,
 				FBE9DD3F1D0D08740057623B /* Products */,
+				D3BB0F5365C156607D506B62 /* Pods */,
+				3034E1E1624DA865281FA969 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,15 +193,38 @@
 		FBE9DD401D0D08740057623B /* QFirst */ = {
 			isa = PBXGroup;
 			children = (
+				FBE9DDBA1D0D0C680057623B /* Tools */,
+				FBE9DD7D1D0D09F30057623B /* Models */,
+				FBE9DD7C1D0D097E0057623B /* Views */,
+				FBE9DD5B1D0D096C0057623B /* BookHistoryViewController.h */,
+				FBE9DD5C1D0D096C0057623B /* BookHistoryViewController.m */,
+				FBE9DD5D1D0D096C0057623B /* BookmarkSearchResultTableViewController.h */,
+				FBE9DD5E1D0D096C0057623B /* BookmarkSearchResultTableViewController.m */,
+				FBE9DD5F1D0D096C0057623B /* BookmarkViewController.h */,
+				FBE9DD601D0D096C0057623B /* BookmarkViewController.m */,
+				FBE9DD611D0D096C0057623B /* ClinicDetailViewController.h */,
+				FBE9DD621D0D096C0057623B /* ClinicDetailViewController.m */,
+				FBE9DD631D0D096C0057623B /* ClinicSearchResultTableViewController.h */,
+				FBE9DD641D0D096C0057623B /* ClinicSearchResultTableViewController.m */,
+				FBE9DD651D0D096C0057623B /* ClinicViewController.h */,
+				FBE9DD661D0D096C0057623B /* ClinicViewController.m */,
+				FBE9DD671D0D096C0057623B /* DoctorDetailViewController.h */,
+				FBE9DD681D0D096C0057623B /* DoctorDetailViewController.m */,
+				FBE9DD691D0D096C0057623B /* LoginViewController.h */,
+				FBE9DD6A1D0D096C0057623B /* LoginViewController.m */,
+				FBE9DD6B1D0D096C0057623B /* MeViewController.h */,
+				FBE9DD6C1D0D096C0057623B /* MeViewController.m */,
+				FBE9DD6D1D0D096C0057623B /* QRCodeViewController.h */,
+				FBE9DD6E1D0D096C0057623B /* QRCodeViewController.m */,
+				FBE9DD6F1D0D096C0057623B /* TimelineViewController.h */,
+				FBE9DD701D0D096C0057623B /* TimelineViewController.m */,
 				FBE9DD441D0D08740057623B /* AppDelegate.h */,
 				FBE9DD451D0D08740057623B /* AppDelegate.m */,
-				FBE9DD471D0D08740057623B /* ViewController.h */,
-				FBE9DD481D0D08740057623B /* ViewController.m */,
+				FBE9DDD61D0D11010057623B /* CoreData.xcdatamodeld */,
 				FBE9DD4A1D0D08740057623B /* Main.storyboard */,
 				FBE9DD501D0D08740057623B /* Assets.xcassets */,
 				FBE9DD521D0D08740057623B /* LaunchScreen.storyboard */,
 				FBE9DD551D0D08740057623B /* Info.plist */,
-				FBE9DD4D1D0D08740057623B /* QFirst.xcdatamodeld */,
 				FBE9DD411D0D08740057623B /* Supporting Files */,
 			);
 			path = QFirst;
@@ -82,6 +238,110 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		FBE9DD7C1D0D097E0057623B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FBE9DDB61D0D0C4A0057623B /* FXBlurView */,
+				FBE9DDA91D0D0BFE0057623B /* QRView */,
+				FBE9DD991D0D0B640057623B /* TopAlertView */,
+				FBE9DDBB1D0D0CB10057623B /* DoctorCell.h */,
+				FBE9DDBC1D0D0CB10057623B /* DoctorCell.m */,
+				FBE9DDBD1D0D0CB10057623B /* DoctorCell.xib */,
+				FBE9DDBE1D0D0CB10057623B /* PasscodeView.h */,
+				FBE9DDBF1D0D0CB10057623B /* PasscodeView.m */,
+				FBE9DDC01D0D0CB10057623B /* PasscodeView.xib */,
+				FBE9DDC11D0D0CB10057623B /* SignupView.h */,
+				FBE9DDC21D0D0CB10057623B /* SignupView.m */,
+				FBE9DDC31D0D0CB10057623B /* SignupView.xib */,
+				FBE9DDC41D0D0CB10057623B /* TimeCell.h */,
+				FBE9DDC51D0D0CB10057623B /* TimeCell.m */,
+				FBE9DDC61D0D0CB10057623B /* UILabel+DynamicSize.h */,
+				FBE9DDC71D0D0CB10057623B /* UILabel+DynamicSize.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		FBE9DD7D1D0D09F30057623B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FBE9DD7E1D0D0A4F0057623B /* Clinic.h */,
+				FBE9DD7F1D0D0A4F0057623B /* Clinic.m */,
+				FBE9DD801D0D0A4F0057623B /* ClinicInfo.h */,
+				FBE9DD811D0D0A4F0057623B /* ClinicInfo.m */,
+				FBE9DD821D0D0A4F0057623B /* Image.h */,
+				FBE9DD831D0D0A4F0057623B /* Image.m */,
+				FBE9DD841D0D0A4F0057623B /* Reservation.h */,
+				FBE9DD851D0D0A4F0057623B /* Reservation.m */,
+				FBE9DD861D0D0A4F0057623B /* TimeLine.h */,
+				FBE9DD871D0D0A4F0057623B /* TimeLine.m */,
+				FBE9DD881D0D0A4F0057623B /* User.h */,
+				FBE9DD891D0D0A4F0057623B /* User.m */,
+				FBE9DD961D0D0B040057623B /* Clinic+CoreDataProperties.h */,
+				FBE9DD971D0D0B040057623B /* Clinic+CoreDataProperties.m */,
+				FBE9DD921D0D0ABD0057623B /* qfirst.xcdatamodeld */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		FBE9DD991D0D0B640057623B /* TopAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				FBE9DDA61D0D0BEA0057623B /* MozTopAlertView.h */,
+				FBE9DDA71D0D0BEA0057623B /* MozTopAlertView.m */,
+				FBE9DD9A1D0D0B950057623B /* fontawesome */,
+			);
+			name = TopAlertView;
+			sourceTree = "<group>";
+		};
+		FBE9DD9A1D0D0B950057623B /* fontawesome */ = {
+			isa = PBXGroup;
+			children = (
+				FBE9DD9B1D0D0BC70057623B /* FAImageView.h */,
+				FBE9DD9C1D0D0BC70057623B /* FAImageView.m */,
+				FBE9DD9D1D0D0BC70057623B /* FontAwesome.ttf */,
+				FBE9DD9E1D0D0BC70057623B /* NSString+FontAwesome.h */,
+				FBE9DD9F1D0D0BC70057623B /* NSString+FontAwesome.m */,
+				FBE9DDA01D0D0BC70057623B /* UIFont+FontAwesome.h */,
+				FBE9DDA11D0D0BC70057623B /* UIFont+FontAwesome.m */,
+			);
+			name = fontawesome;
+			sourceTree = "<group>";
+		};
+		FBE9DDA91D0D0BFE0057623B /* QRView */ = {
+			isa = PBXGroup;
+			children = (
+				FBE9DDAA1D0D0C320057623B /* QRItem.h */,
+				FBE9DDAB1D0D0C320057623B /* QRItem.m */,
+				FBE9DDAC1D0D0C320057623B /* QRMenu.h */,
+				FBE9DDAD1D0D0C320057623B /* QRMenu.m */,
+				FBE9DDAE1D0D0C320057623B /* QRUtil.h */,
+				FBE9DDAF1D0D0C320057623B /* QRUtil.m */,
+				FBE9DDB01D0D0C320057623B /* QRView.h */,
+				FBE9DDB11D0D0C320057623B /* QRView.m */,
+			);
+			name = QRView;
+			sourceTree = "<group>";
+		};
+		FBE9DDB61D0D0C4A0057623B /* FXBlurView */ = {
+			isa = PBXGroup;
+			children = (
+				FBE9DDB71D0D0C620057623B /* FXBlurView.h */,
+				FBE9DDB81D0D0C620057623B /* FXBlurView.m */,
+			);
+			name = FXBlurView;
+			sourceTree = "<group>";
+		};
+		FBE9DDBA1D0D0C680057623B /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				FBE9DDD01D0D0CE20057623B /* ConstantValues.h */,
+				FBE9DDD11D0D0CE20057623B /* ConstantValues.m */,
+				FBE9DDD21D0D0CE20057623B /* Utils.h */,
+				FBE9DDD31D0D0CE20057623B /* Utils.m */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -89,9 +349,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FBE9DD581D0D08740057623B /* Build configuration list for PBXNativeTarget "QFirst" */;
 			buildPhases = (
+				39D3B733974DE32310A267C6 /* 📦 Check Pods Manifest.lock */,
 				FBE9DD3A1D0D08740057623B /* Sources */,
 				FBE9DD3B1D0D08740057623B /* Frameworks */,
 				FBE9DD3C1D0D08740057623B /* Resources */,
+				E91918B6A1B0B25E98EE638A /* 📦 Embed Pods Frameworks */,
+				60D8003F6F0B4573EFBC5854 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -142,20 +405,106 @@
 				FBE9DD541D0D08740057623B /* LaunchScreen.storyboard in Resources */,
 				FBE9DD511D0D08740057623B /* Assets.xcassets in Resources */,
 				FBE9DD4C1D0D08740057623B /* Main.storyboard in Resources */,
+				FBE9DDCD1D0D0CB10057623B /* SignupView.xib in Resources */,
+				FBE9DDC91D0D0CB10057623B /* DoctorCell.xib in Resources */,
+				FBE9DDCB1D0D0CB10057623B /* PasscodeView.xib in Resources */,
+				FBE9DDA31D0D0BC70057623B /* FontAwesome.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		39D3B733974DE32310A267C6 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		60D8003F6F0B4573EFBC5854 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QFirst/Pods-QFirst-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E91918B6A1B0B25E98EE638A /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QFirst/Pods-QFirst-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FBE9DD3A1D0D08740057623B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBE9DD4F1D0D08740057623B /* QFirst.xcdatamodeld in Sources */,
-				FBE9DD491D0D08740057623B /* ViewController.m in Sources */,
+				FBE9DDD41D0D0CE20057623B /* ConstantValues.m in Sources */,
+				FBE9DD8D1D0D0A4F0057623B /* Reservation.m in Sources */,
+				FBE9DD721D0D096C0057623B /* BookmarkSearchResultTableViewController.m in Sources */,
+				FBE9DD8B1D0D0A4F0057623B /* ClinicInfo.m in Sources */,
+				FBE9DDA81D0D0BEA0057623B /* MozTopAlertView.m in Sources */,
+				FBE9DDCA1D0D0CB10057623B /* PasscodeView.m in Sources */,
+				FBE9DDB41D0D0C320057623B /* QRUtil.m in Sources */,
+				FBE9DD741D0D096C0057623B /* ClinicDetailViewController.m in Sources */,
+				FBE9DDCC1D0D0CB10057623B /* SignupView.m in Sources */,
+				FBE9DDCF1D0D0CB10057623B /* UILabel+DynamicSize.m in Sources */,
+				FBE9DDD51D0D0CE20057623B /* Utils.m in Sources */,
 				FBE9DD461D0D08740057623B /* AppDelegate.m in Sources */,
+				FBE9DD8A1D0D0A4F0057623B /* Clinic.m in Sources */,
+				FBE9DD8F1D0D0A4F0057623B /* User.m in Sources */,
+				FBE9DD711D0D096C0057623B /* BookHistoryViewController.m in Sources */,
+				FBE9DD981D0D0B040057623B /* Clinic+CoreDataProperties.m in Sources */,
+				FBE9DD7A1D0D096C0057623B /* QRCodeViewController.m in Sources */,
+				FBE9DDB21D0D0C320057623B /* QRItem.m in Sources */,
+				FBE9DDB91D0D0C620057623B /* FXBlurView.m in Sources */,
 				FBE9DD431D0D08740057623B /* main.m in Sources */,
+				FBE9DD771D0D096C0057623B /* DoctorDetailViewController.m in Sources */,
+				FBE9DDA21D0D0BC70057623B /* FAImageView.m in Sources */,
+				FBE9DDC81D0D0CB10057623B /* DoctorCell.m in Sources */,
+				FBE9DD8E1D0D0A4F0057623B /* TimeLine.m in Sources */,
+				FBE9DDCE1D0D0CB10057623B /* TimeCell.m in Sources */,
+				FBE9DD781D0D096C0057623B /* LoginViewController.m in Sources */,
+				FBE9DD791D0D096C0057623B /* MeViewController.m in Sources */,
+				FBE9DD751D0D096C0057623B /* ClinicSearchResultTableViewController.m in Sources */,
+				FBE9DDA51D0D0BC70057623B /* UIFont+FontAwesome.m in Sources */,
+				FBE9DD951D0D0ABD0057623B /* qfirst.xcdatamodeld in Sources */,
+				FBE9DD761D0D096C0057623B /* ClinicViewController.m in Sources */,
+				FBE9DDB31D0D0C320057623B /* QRMenu.m in Sources */,
+				FBE9DDD81D0D11010057623B /* CoreData.xcdatamodeld in Sources */,
+				FBE9DDA41D0D0BC70057623B /* NSString+FontAwesome.m in Sources */,
+				FBE9DD8C1D0D0A4F0057623B /* Image.m in Sources */,
+				FBE9DD731D0D096C0057623B /* BookmarkViewController.m in Sources */,
+				FBE9DD7B1D0D096C0057623B /* TimelineViewController.m in Sources */,
+				FBE9DDB51D0D0C320057623B /* QRView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +614,7 @@
 		};
 		FBE9DD591D0D08740057623B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CECF10B6D318714464CB153C /* Pods-QFirst.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = QFirst/Info.plist;
@@ -276,6 +626,7 @@
 		};
 		FBE9DD5A1D0D08740057623B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4AEF171B9F4336F1972CE758 /* Pods-QFirst.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = QFirst/Info.plist;
@@ -304,17 +655,28 @@
 				FBE9DD5A1D0D08740057623B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		FBE9DD4D1D0D08740057623B /* QFirst.xcdatamodeld */ = {
+		FBE9DD921D0D0ABD0057623B /* qfirst.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				FBE9DD4E1D0D08740057623B /* QFirst.xcdatamodel */,
+				FBE9DD931D0D0ABD0057623B /* qfirst.xcdatamodel */,
 			);
-			currentVersion = FBE9DD4E1D0D08740057623B /* QFirst.xcdatamodel */;
-			path = QFirst.xcdatamodeld;
+			currentVersion = FBE9DD931D0D0ABD0057623B /* qfirst.xcdatamodel */;
+			path = qfirst.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		FBE9DDD61D0D11010057623B /* CoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FBE9DDD71D0D11010057623B /* CoreData.xcdatamodel */,
+			);
+			currentVersion = FBE9DDD71D0D11010057623B /* CoreData.xcdatamodel */;
+			path = CoreData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

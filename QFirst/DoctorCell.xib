@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DoctorCell">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="TGr-dv-8yU">
+                    <rect key="frame" x="8" y="8" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="48" id="VOa-27-Hkj"/>
+                        <constraint firstAttribute="height" constant="48" id="b8X-Bs-e3K"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Doctor name here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qtV-c0-LdM">
+                    <rect key="frame" x="64" y="21" width="448" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7O1-gx-SuQ">
+                    <rect key="frame" x="520" y="17" width="72" height="30"/>
+                    <color key="backgroundColor" red="0.29803921568627451" green="0.85098039215686272" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="7O1-gx-SuQ" secondAttribute="height" multiplier="12:5" id="5Tc-0h-qHe"/>
+                        <constraint firstAttribute="width" constant="72" id="qHV-oN-022"/>
+                    </constraints>
+                    <state key="normal" title="Reserve">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <accessibility key="accessibilityConfiguration" identifier="DoctorCell"/>
+            <constraints>
+                <constraint firstItem="7O1-gx-SuQ" firstAttribute="leading" secondItem="qtV-c0-LdM" secondAttribute="trailing" constant="8" id="0Fm-zt-FR2"/>
+                <constraint firstItem="TGr-dv-8yU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Td7-ab-yQg"/>
+                <constraint firstAttribute="trailing" secondItem="7O1-gx-SuQ" secondAttribute="trailing" constant="8" id="WE7-IE-fyx"/>
+                <constraint firstItem="qtV-c0-LdM" firstAttribute="leading" secondItem="TGr-dv-8yU" secondAttribute="trailing" constant="8" id="YFR-pd-sUW"/>
+                <constraint firstItem="TGr-dv-8yU" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="rbW-qx-u6r"/>
+                <constraint firstItem="7O1-gx-SuQ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="uth-Gr-L4v"/>
+                <constraint firstItem="qtV-c0-LdM" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="zzy-Dw-yPc"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="avatarIV" destination="TGr-dv-8yU" id="Ctr-Ck-8bm"/>
+                <outlet property="nameLbl" destination="qtV-c0-LdM" id="EMa-6c-DVi"/>
+                <outlet property="reserveBtn" destination="7O1-gx-SuQ" id="RnC-j2-2Wc"/>
+            </connections>
+            <point key="canvasLocation" x="362" y="64"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="default_avatar" width="600" height="600"/>
+    </resources>
+</document>

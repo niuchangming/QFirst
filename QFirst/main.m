@@ -1,8 +1,8 @@
 //
 //  main.m
-//  QFirst
+//  FirstQ
 //
-//  Created by ChangmingNiu on 12/6/16.
+//  Created by ChangmingNiu on 2/5/16.
 //  Copyright © 2016 EKOO LAB PTE. LTD. All rights reserved.
 //
 
