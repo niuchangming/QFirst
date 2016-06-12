@@ -14,7 +14,7 @@
 @protocol LoginViewControllerDelegate <NSObject>
 
 @required
--(void) dismisswithError:(NSString*) err;
+-(void) loginComplete:(NSString*) err;
 
 @end
 

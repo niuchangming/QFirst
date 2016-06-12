@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FXBlurView.h"
 #import "User.h"
+#import "LoginViewController.h"
 
 @protocol ReserveDelegate <NSObject>
 
@@ -17,7 +18,7 @@
 
 @end
 
-@interface DoctorDetailViewController : UIViewController
+@interface DoctorDetailViewController : UIViewController<LoginViewControllerDelegate>
 
 @property (strong, nonatomic) User *doctor;
 @property (strong, nonatomic) NSString *clinicName;

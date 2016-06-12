@@ -4,14 +4,13 @@
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contact" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="entityId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="isBookmark" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="entityId" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="isCoop" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Clinic" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="Clinic" positionX="241" positionY="63" width="128" height="163"/>
     </elements>
 </model>

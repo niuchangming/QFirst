@@ -26,8 +26,8 @@
     CGPoint tempContentOffset;
     int doctorContainerHeight;
     bool isFirstLoad;
-    Clinic *dbClinic;
     bool isQuick;
+    Clinic *dbClinic;
 }
 
 @end
@@ -114,8 +114,7 @@
 
 -(void) checkBookmark{
     dbClinic = [clinic retrieve];
-    if(dbClinic != nil){
-        clinic.isBookmark = true;
+    if(dbClinic){
         [bookmarkBtn setBackgroundImage:[UIImage imageNamed:@"star_filled"] forState:UIControlStateNormal];
     }
 }
@@ -160,7 +159,7 @@
                 avatarIV.clipsToBounds = YES;
                 avatarIV.contentMode = UIViewContentModeScaleAspectFill;
                 avatarIV.layer.masksToBounds = YES;
-                [avatarIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatar?id=%i", baseUrl, [[[clinic.doctors objectAtIndex:i] avatar] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+                [avatarIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatarThumbnail?id=%i", baseUrl, [[[clinic.doctors objectAtIndex:i] avatar] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
                 [doctorCell addSubview:avatarIV];
                 
                 UILabel *nameLbl = [[UILabel alloc]initWithFrame:CGRectMake(64, 25, self.view.frame.size.width - 152, 22)];
@@ -293,19 +292,13 @@
 }
 
 - (IBAction)bookmarkBtnClicked:(id)sender {
-    if(clinic.isBookmark){
-        clinic.isBookmark = false;
+    if(dbClinic){
         [bookmarkBtn setBackgroundImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
-    }else{
-        clinic.isBookmark = true;
-        [bookmarkBtn setBackgroundImage:[UIImage imageNamed:@"star_filled"] forState:UIControlStateNormal];
-    }
-    
-    if (dbClinic == nil) {
-        dbClinic = [clinic save];
-    }else{
         [dbClinic delele];
         dbClinic = nil;
+    }else{
+        [bookmarkBtn setBackgroundImage:[UIImage imageNamed:@"star_filled"] forState:UIControlStateNormal];
+        dbClinic = [clinic createDBClinicByOriginal];
     }
 }
 
@@ -356,7 +349,7 @@
     }
 }
 
--(void) dismisswithError:(NSString *)err{
+-(void) loginComplete:(NSString *)err{
     if(![Utils IsEmpty:err]){
         [MozTopAlertView showWithType:MozAlertTypeError text:err doText:nil doBlock:nil parentView:self.view];
     }

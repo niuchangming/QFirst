@@ -25,13 +25,11 @@
 		FBE9DD7A1D0D096C0057623B /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD6E1D0D096C0057623B /* QRCodeViewController.m */; };
 		FBE9DD7B1D0D096C0057623B /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD701D0D096C0057623B /* TimelineViewController.m */; };
 		FBE9DD8A1D0D0A4F0057623B /* Clinic.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD7F1D0D0A4F0057623B /* Clinic.m */; };
-		FBE9DD8B1D0D0A4F0057623B /* ClinicInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD811D0D0A4F0057623B /* ClinicInfo.m */; };
 		FBE9DD8C1D0D0A4F0057623B /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD831D0D0A4F0057623B /* Image.m */; };
 		FBE9DD8D1D0D0A4F0057623B /* Reservation.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD851D0D0A4F0057623B /* Reservation.m */; };
 		FBE9DD8E1D0D0A4F0057623B /* TimeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD871D0D0A4F0057623B /* TimeLine.m */; };
 		FBE9DD8F1D0D0A4F0057623B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD891D0D0A4F0057623B /* User.m */; };
 		FBE9DD951D0D0ABD0057623B /* qfirst.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD921D0D0ABD0057623B /* qfirst.xcdatamodeld */; };
-		FBE9DD981D0D0B040057623B /* Clinic+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD971D0D0B040057623B /* Clinic+CoreDataProperties.m */; };
 		FBE9DDA21D0D0BC70057623B /* FAImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD9C1D0D0BC70057623B /* FAImageView.m */; };
 		FBE9DDA31D0D0BC70057623B /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FBE9DD9D1D0D0BC70057623B /* FontAwesome.ttf */; };
 		FBE9DDA41D0D0BC70057623B /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DD9F1D0D0BC70057623B /* NSString+FontAwesome.m */; };
@@ -53,6 +51,8 @@
 		FBE9DDD41D0D0CE20057623B /* ConstantValues.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDD11D0D0CE20057623B /* ConstantValues.m */; };
 		FBE9DDD51D0D0CE20057623B /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDD31D0D0CE20057623B /* Utils.m */; };
 		FBE9DDD81D0D11010057623B /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDD61D0D11010057623B /* CoreData.xcdatamodeld */; };
+		FBE9DDDB1D0D20E00057623B /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDDA1D0D20E00057623B /* LocationService.m */; };
+		FBE9DDE11D0DBA3F0057623B /* BookHistorySearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDE01D0DBA3F0057623B /* BookHistorySearchTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,8 +91,6 @@
 		FBE9DD701D0D096C0057623B /* TimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
 		FBE9DD7E1D0D0A4F0057623B /* Clinic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clinic.h; sourceTree = "<group>"; };
 		FBE9DD7F1D0D0A4F0057623B /* Clinic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Clinic.m; sourceTree = "<group>"; };
-		FBE9DD801D0D0A4F0057623B /* ClinicInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicInfo.h; sourceTree = "<group>"; };
-		FBE9DD811D0D0A4F0057623B /* ClinicInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicInfo.m; sourceTree = "<group>"; };
 		FBE9DD821D0D0A4F0057623B /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		FBE9DD831D0D0A4F0057623B /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		FBE9DD841D0D0A4F0057623B /* Reservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reservation.h; sourceTree = "<group>"; };
@@ -102,8 +100,6 @@
 		FBE9DD881D0D0A4F0057623B /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		FBE9DD891D0D0A4F0057623B /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		FBE9DD931D0D0ABD0057623B /* qfirst.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = qfirst.xcdatamodel; sourceTree = "<group>"; };
-		FBE9DD961D0D0B040057623B /* Clinic+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Clinic+CoreDataProperties.h"; sourceTree = "<group>"; };
-		FBE9DD971D0D0B040057623B /* Clinic+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Clinic+CoreDataProperties.m"; sourceTree = "<group>"; };
 		FBE9DD9B1D0D0BC70057623B /* FAImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAImageView.h; sourceTree = "<group>"; };
 		FBE9DD9C1D0D0BC70057623B /* FAImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAImageView.m; sourceTree = "<group>"; };
 		FBE9DD9D1D0D0BC70057623B /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
@@ -141,6 +137,10 @@
 		FBE9DDD21D0D0CE20057623B /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		FBE9DDD31D0D0CE20057623B /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		FBE9DDD71D0D11010057623B /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
+		FBE9DDD91D0D20E00057623B /* LocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationService.h; sourceTree = "<group>"; };
+		FBE9DDDA1D0D20E00057623B /* LocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationService.m; sourceTree = "<group>"; };
+		FBE9DDDF1D0DBA3F0057623B /* BookHistorySearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookHistorySearchTableViewController.h; sourceTree = "<group>"; };
+		FBE9DDE01D0DBA3F0057623B /* BookHistorySearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookHistorySearchTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +198,10 @@
 				FBE9DD7C1D0D097E0057623B /* Views */,
 				FBE9DD5B1D0D096C0057623B /* BookHistoryViewController.h */,
 				FBE9DD5C1D0D096C0057623B /* BookHistoryViewController.m */,
+				FBE9DD651D0D096C0057623B /* ClinicViewController.h */,
+				FBE9DD661D0D096C0057623B /* ClinicViewController.m */,
+				FBE9DDDF1D0DBA3F0057623B /* BookHistorySearchTableViewController.h */,
+				FBE9DDE01D0DBA3F0057623B /* BookHistorySearchTableViewController.m */,
 				FBE9DD5D1D0D096C0057623B /* BookmarkSearchResultTableViewController.h */,
 				FBE9DD5E1D0D096C0057623B /* BookmarkSearchResultTableViewController.m */,
 				FBE9DD5F1D0D096C0057623B /* BookmarkViewController.h */,
@@ -206,8 +210,6 @@
 				FBE9DD621D0D096C0057623B /* ClinicDetailViewController.m */,
 				FBE9DD631D0D096C0057623B /* ClinicSearchResultTableViewController.h */,
 				FBE9DD641D0D096C0057623B /* ClinicSearchResultTableViewController.m */,
-				FBE9DD651D0D096C0057623B /* ClinicViewController.h */,
-				FBE9DD661D0D096C0057623B /* ClinicViewController.m */,
 				FBE9DD671D0D096C0057623B /* DoctorDetailViewController.h */,
 				FBE9DD681D0D096C0057623B /* DoctorDetailViewController.m */,
 				FBE9DD691D0D096C0057623B /* LoginViewController.h */,
@@ -266,8 +268,6 @@
 			children = (
 				FBE9DD7E1D0D0A4F0057623B /* Clinic.h */,
 				FBE9DD7F1D0D0A4F0057623B /* Clinic.m */,
-				FBE9DD801D0D0A4F0057623B /* ClinicInfo.h */,
-				FBE9DD811D0D0A4F0057623B /* ClinicInfo.m */,
 				FBE9DD821D0D0A4F0057623B /* Image.h */,
 				FBE9DD831D0D0A4F0057623B /* Image.m */,
 				FBE9DD841D0D0A4F0057623B /* Reservation.h */,
@@ -276,8 +276,6 @@
 				FBE9DD871D0D0A4F0057623B /* TimeLine.m */,
 				FBE9DD881D0D0A4F0057623B /* User.h */,
 				FBE9DD891D0D0A4F0057623B /* User.m */,
-				FBE9DD961D0D0B040057623B /* Clinic+CoreDataProperties.h */,
-				FBE9DD971D0D0B040057623B /* Clinic+CoreDataProperties.m */,
 				FBE9DD921D0D0ABD0057623B /* qfirst.xcdatamodeld */,
 			);
 			name = Models;
@@ -338,6 +336,8 @@
 				FBE9DDD11D0D0CE20057623B /* ConstantValues.m */,
 				FBE9DDD21D0D0CE20057623B /* Utils.h */,
 				FBE9DDD31D0D0CE20057623B /* Utils.m */,
+				FBE9DDD91D0D20E00057623B /* LocationService.h */,
+				FBE9DDDA1D0D20E00057623B /* LocationService.m */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -470,10 +470,10 @@
 				FBE9DDD41D0D0CE20057623B /* ConstantValues.m in Sources */,
 				FBE9DD8D1D0D0A4F0057623B /* Reservation.m in Sources */,
 				FBE9DD721D0D096C0057623B /* BookmarkSearchResultTableViewController.m in Sources */,
-				FBE9DD8B1D0D0A4F0057623B /* ClinicInfo.m in Sources */,
 				FBE9DDA81D0D0BEA0057623B /* MozTopAlertView.m in Sources */,
 				FBE9DDCA1D0D0CB10057623B /* PasscodeView.m in Sources */,
 				FBE9DDB41D0D0C320057623B /* QRUtil.m in Sources */,
+				FBE9DDDB1D0D20E00057623B /* LocationService.m in Sources */,
 				FBE9DD741D0D096C0057623B /* ClinicDetailViewController.m in Sources */,
 				FBE9DDCC1D0D0CB10057623B /* SignupView.m in Sources */,
 				FBE9DDCF1D0D0CB10057623B /* UILabel+DynamicSize.m in Sources */,
@@ -482,7 +482,6 @@
 				FBE9DD8A1D0D0A4F0057623B /* Clinic.m in Sources */,
 				FBE9DD8F1D0D0A4F0057623B /* User.m in Sources */,
 				FBE9DD711D0D096C0057623B /* BookHistoryViewController.m in Sources */,
-				FBE9DD981D0D0B040057623B /* Clinic+CoreDataProperties.m in Sources */,
 				FBE9DD7A1D0D096C0057623B /* QRCodeViewController.m in Sources */,
 				FBE9DDB21D0D0C320057623B /* QRItem.m in Sources */,
 				FBE9DDB91D0D0C620057623B /* FXBlurView.m in Sources */,
@@ -497,6 +496,7 @@
 				FBE9DD751D0D096C0057623B /* ClinicSearchResultTableViewController.m in Sources */,
 				FBE9DDA51D0D0BC70057623B /* UIFont+FontAwesome.m in Sources */,
 				FBE9DD951D0D0ABD0057623B /* qfirst.xcdatamodeld in Sources */,
+				FBE9DDE11D0DBA3F0057623B /* BookHistorySearchTableViewController.m in Sources */,
 				FBE9DD761D0D096C0057623B /* ClinicViewController.m in Sources */,
 				FBE9DDB31D0D0C320057623B /* QRMenu.m in Sources */,
 				FBE9DDD81D0D11010057623B /* CoreData.xcdatamodeld in Sources */,

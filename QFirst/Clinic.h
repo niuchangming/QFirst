@@ -10,8 +10,6 @@
 #import "Image.h"
 #import <CoreData/CoreData.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface Clinic : NSManagedObject
 
 @property int entityId;
@@ -22,20 +20,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *longitude;
 @property (nonatomic, strong) NSString *contact;
 @property (nonatomic, strong) Image *logo;
-@property int queue;
 @property BOOL isCoop;
-@property BOOL isBookmark;
 
 @property (nonatomic, strong) NSMutableArray *doctors;
 
 -(id) initWithJson:(NSDictionary*) dic;
--(Clinic *) save;
+
+-(Clinic *) createDBClinicByOriginal;
+
 -(Clinic *) retrieve;
--(void) update;
+
 -(void) delele;
 
 @end
 
-NS_ASSUME_NONNULL_END
-
-#import "Clinic+CoreDataProperties.h"

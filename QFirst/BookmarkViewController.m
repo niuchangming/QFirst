@@ -13,7 +13,7 @@
 #import "Clinic.h"
 #import <QuartzCore/QuartzCore.h>
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "BookmarkSearchResultTableViewController.h"
+#import "BookHistorySearchTableViewController.h"
 
 @interface BookmarkViewController ()
 
@@ -141,8 +141,8 @@
     if (self.searchController.searchResultsController) {
         UINavigationController *navController = (UINavigationController *)self.searchController.searchResultsController;
         
-        BookmarkSearchResultTableViewController *vc = (BookmarkSearchResultTableViewController *)navController.topViewController;
-        vc.clinicResults = self.searchResults;
+        BookHistorySearchTableViewController *vc = (BookHistorySearchTableViewController *)navController.topViewController;
+        vc.bookResults = self.searchResults;
         [vc.tableView reloadData];
     }
     

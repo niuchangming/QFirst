@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Image.h"
+#import <CoreData/CoreData.h>
 
 @interface User : NSObject
 

@@ -189,6 +189,19 @@
     [self performSegueWithIdentifier:@"segue_login_doctor_detail" sender:nil];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"segue_login_doctor_detail"]){
+        LoginViewController *vc = [segue destinationViewController];
+        vc.delegate = self;
+    }
+}
+
+-(void) loginComplete:(NSString *)err{
+    if(![Utils IsEmpty:err]){
+        [MozTopAlertView showWithType:MozAlertTypeError text:err doText:nil doBlock:nil parentView:self.view];
+    }
+}
+
 @end
 
 

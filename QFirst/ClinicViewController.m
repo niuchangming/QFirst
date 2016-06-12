@@ -17,10 +17,12 @@
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ClinicSearchResultTableViewController.h"
+#import "LocationService.h"
 
 @interface ClinicViewController (){
     NSIndexPath *indexPathForSelectedRow;
     UIBarButtonItem *rightButton;
+    CLLocation * location;
 }
 
 @end
@@ -48,6 +50,8 @@
     [self initSearchBarController];
     
     [self loadClinics];
+    
+    location = [LocationService sharedInstance].currentLocation;
 }
 
 -(void) initSearchBarController{
@@ -116,11 +120,16 @@
     UILabel *nameLbl = (UILabel *)[cell viewWithTag:2];
     nameLbl.text = [[clinicArray objectAtIndex:indexPath.row] name];
     
+    double latitude = [[[clinicArray objectAtIndex:indexPath.row] latitude] doubleValue];
+    double longtitude = [[[clinicArray objectAtIndex:indexPath.row] longitude] doubleValue];
+    
+    CLLocation *clinicLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longtitude];
+    CLLocationDistance distance = [location distanceFromLocation:clinicLocation];
+
     UILabel *distanceLbl = (UILabel *)[cell viewWithTag:3];
-    distanceLbl.text = @"10km";
+    distanceLbl.text = [NSString stringWithFormat:@"%.1fkm", distance];
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }

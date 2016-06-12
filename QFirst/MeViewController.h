@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "FXBlurView.h"
 #import "User.h"
+#import "LoginViewController.h"
 
-@interface MeViewController : UIViewController
+@interface MeViewController : UIViewController<LoginViewControllerDelegate>
 
 @property (strong, nonatomic) UIButton *signBtn;
 @property (weak, nonatomic) IBOutlet UIView *container;
@@ -19,7 +20,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLbl;
 @property (weak, nonatomic) IBOutlet UIImageView *roleIv;
 @property (weak, nonatomic) IBOutlet UIImageView *userAvatarIv;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingBar;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (strong, nonatomic) User *user;

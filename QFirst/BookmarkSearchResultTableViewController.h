@@ -10,6 +10,6 @@
 
 @interface BookmarkSearchResultTableViewController : UITableViewController
 
-@property (nonatomic, strong) NSMutableArray *clinicResults;
+@property (nonatomic, strong) NSMutableArray *bookResults;
 
 @end

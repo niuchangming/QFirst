@@ -128,6 +128,7 @@
         }else{
             User *user = [[User alloc] initWithJson:obj];
             [self storeUserInfo:user];
+            [delegate loginComplete:nil];
             [self cancelBtnClicked:nil];
         }
     }else{
@@ -148,14 +149,12 @@
 -(void) verifyCompletedWithResponseData:(id)resp withError:(NSString *)err{
     
     if(![Utils IsEmpty:err]){
-        [delegate dismisswithError:err];
+        [delegate loginComplete:err];
     }else{
         [self parseUser:resp];
     }
     
-    [verifyPopView dismissWithCompletion:^(){
-        [self cancelBtnClicked:nil];
-    }];
+    [verifyPopView dismissWithCompletion:nil];
 }
 
 - (IBAction)submitBtnClicked:(id)sender {

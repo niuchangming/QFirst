@@ -9,6 +9,7 @@
 #import "User.h"
 #import "Reservation.h"
 #import "Utils.h"
+#import "Clinic.h"
 
 @implementation User
 
@@ -26,7 +27,7 @@
 
 -(id) initWithJson:(NSDictionary*) dic{
     self = [super init];
-
+    
     if(self){
         self.entityId = [[dic valueForKey:@"entityId"] intValue];
         self.name = [dic valueForKey:@"name"];

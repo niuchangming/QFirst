@@ -12,20 +12,16 @@
 #import "Reservation.h"
 #import "User.h"
 #import "MozTopAlertView.h"
+#import <JGProgressHUD/JGProgressHUD.h>
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 #import "SDWebImage/UIImageView+WebCache.h"
 
 @interface MeViewController (){
-    bool isLogin;
     UILabel *mobileLbl;
     UILabel *emailLbl;
     UILabel *icLbl;
     UILabel *bookLbl;
     UILabel *queueLbl;
-    UILabel *cashierLbl;
-    UILabel *taskLbl;
-    UIButton *editNameBtn;
-    UIActionSheet *avatarOptSheet;
 }
 
 @end
@@ -38,7 +34,6 @@
 @synthesize nameLbl;
 @synthesize roleIv;
 @synthesize userAvatarIv;
-@synthesize loadingBar;
 @synthesize scrollView;
 @synthesize container;
 @synthesize user;
@@ -154,6 +149,9 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject: [Utils accessToken] forKey: @"accessToken"];
     
+    JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleExtraLight];
+    [HUD showInView:self.navigationController.view];
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]] == YES){
@@ -173,10 +171,10 @@
         } else {
             [MozTopAlertView showWithType:MozAlertTypeError text:@"Data type error." doText:nil doBlock:nil parentView:self.view];
         }
-        [loadingBar stopAnimating];
+        [HUD dismissAnimated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MozTopAlertView showWithType:MozAlertTypeError text:[error localizedDescription] doText:nil doBlock:nil parentView:self.view];
-        [loadingBar stopAnimating];
+        [HUD dismissAnimated:YES];
     }];
 }
 
@@ -238,8 +236,39 @@
     [self performSegueWithIdentifier:@"segue_login_me" sender:nil];
 }
 
-- (void)signBtnClicked:(id)sender {
+-(void) logout{
+    [self clearStore];
+    
+    nameLbl.text = @"";
+    emailLbl.text = @"";
+    mobileLbl.text = @"";
+    icLbl.text = @"";
+  
+    if(bookLbl != nil){
+        [bookLbl setHidden:YES];
+    }
+    
+    if(icLbl != nil){
+        [icLbl setHidden:YES];
+    }
+    
+    [userAvatarIv setImage:[UIImage imageNamed:@"default_avatar"]];
+    [bgImageView setImage:[UIImage imageNamed:@"default_avatar"]];
+    
+    [self login];
+}
 
+- (void)signBtnClicked:(id)sender {
+    if([Utils IsEmpty:[Utils accessToken]]){
+        [self login];
+    }else{
+        [self logout];
+    }
+}
+
+-(void) clearStore{
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -257,14 +286,20 @@
     }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"segue_login_me"]){
+        LoginViewController *vc = [segue destinationViewController];
+        vc.delegate = self;
+    }
 }
-*/
+
+-(void) loginComplete:(NSString *)err{
+    if([Utils IsEmpty:err]){
+        [self resetSignBtn];
+        [self getUserInfo];
+        
+    }
+}
+
 
 @end

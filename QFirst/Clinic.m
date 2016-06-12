@@ -20,9 +20,7 @@
 @synthesize contact;
 @synthesize desc;
 @synthesize logo;
-@synthesize queue;
 @synthesize isCoop;
-@synthesize isBookmark;
 @synthesize doctors;
 
 -(id) initWithJson:(NSDictionary*) dic{
@@ -36,8 +34,6 @@
         self.isCoop = [[dic valueForKey:@"isCooperated"] boolValue];
         self.latitude = [dic valueForKey:@"latitude"];
         self.longitude = [dic valueForKey:@"longtitude"];
-        self.queue = [self getRandomNumberBetween:1 to:100];
-        self.isBookmark = false;
         
         NSArray *imageArray = [dic valueForKey:@"images"];
         if(![imageArray isKindOfClass:[NSNull class]] && imageArray.count > 0){
@@ -58,43 +54,18 @@
     return self;
 }
 
--(Clinic *) save{
+-(Clinic *) createDBClinicByOriginal{
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext* context = [appDelegate managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Clinic" inManagedObjectContext:[appDelegate managedObjectContext]];
     
-    Clinic* clinicTbObj = [NSEntityDescription insertNewObjectForEntityForName:@"Clinic" inManagedObjectContext:context];
-    clinicTbObj.entityId = self.entityId;
-    clinicTbObj.name = self.name;
-    clinicTbObj.address = self.address;
-    clinicTbObj.contact = self.description;
-    clinicTbObj.latitude = self.latitude;
-    clinicTbObj.longitude = self.longitude;
-    clinicTbObj.contact = self.contact;
-    clinicTbObj.isCoop = self.isCoop;
-    clinicTbObj.isBookmark = self.isBookmark;
+    Clinic *dbClinic = [[Clinic alloc] initWithEntity:entity insertIntoManagedObjectContext:[appDelegate managedObjectContext]];
     
-    NSError* error;
-    BOOL isSaved = [context save:&error];
-    if(isSaved == NO || error!=nil) {
-        NSLog(@"Data saving Error: %@",error.debugDescription);
-    } else {
-        NSLog(@"Data saved");
+    NSError *error = nil;
+    if (![[appDelegate managedObjectContext] save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
     
-    return clinicTbObj;
-}
-
--(void) update{
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext* context = [appDelegate managedObjectContext];
-    
-    NSError* error;
-    BOOL isUpdated = [context save:&error];
-    if(isUpdated == NO || error!=nil) {
-        NSLog(@"Data updating Error: %@",error.debugDescription);
-    } else {
-        NSLog(@"Data updated");
-    }
+    return dbClinic;
 }
 
 -(Clinic *) retrieve{
@@ -122,17 +93,13 @@
 -(void) delele {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
     [context deleteObject:self];
     
     NSError *error = nil;
     if (![context save:&error]) {
         NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
-        return;
     }
-}
-
--(int)getRandomNumberBetween:(int)from to:(int)to {
-    return (int)from + arc4random() % (to-from+1);
 }
 
 @end

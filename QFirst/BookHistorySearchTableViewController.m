@@ -1,18 +1,23 @@
 //
-//  BookmarkSearchResultTableViewController.m
-//  FirstQ
+//  BookHistorySearchTableViewController.m
+//  QFirst
 //
-//  Created by ChangmingNiu on 7/6/16.
+//  Created by ChangmingNiu on 12/6/16.
 //  Copyright © 2016 EKOO LAB PTE. LTD. All rights reserved.
 //
 
-#import "BookmarkSearchResultTableViewController.h"
+#import "BookHistorySearchTableViewController.h"
+#import "Reservation.h"
+#import "Image.h"
+#import "ConstantValues.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "User.h"
 
-@interface BookmarkSearchResultTableViewController ()
+@interface BookHistorySearchTableViewController ()
 
 @end
 
-@implementation BookmarkSearchResultTableViewController
+@implementation BookHistorySearchTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,18 +35,38 @@
 
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.bookResults count];
+    return [[self bookResults] count];
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"Cell";
     
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    UIImageView *doctorIv = (UIImageView *)[cell viewWithTag:1];
+    [doctorIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatarThumbnail?id=%i", baseUrl, [[[[self.bookResults objectAtIndex:indexPath.row] doctor] avatar] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    
+    doctorIv.layer.cornerRadius = doctorIv.frame.size.width / 2;
+    doctorIv.clipsToBounds = YES;
+    doctorIv.layer.masksToBounds = YES;
+    
+    UILabel *nameLbl = (UILabel *)[cell viewWithTag:2];
+    nameLbl.text = [[[self.bookResults objectAtIndex:indexPath.row] doctor] name];
+    
+    UILabel *distanceLbl = (UILabel *)[cell viewWithTag:3];
+    distanceLbl.text = @"10km";
+    
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
     
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.
