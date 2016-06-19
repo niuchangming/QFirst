@@ -8,10 +8,10 @@
 
 #import "BookHistorySearchTableViewController.h"
 #import "Reservation.h"
-#import "Image.h"
+#import "DBImage.h"
 #import "ConstantValues.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "User.h"
+#import "DBUser.h"
 
 @interface BookHistorySearchTableViewController ()
 
@@ -47,7 +47,7 @@
     }
     
     UIImageView *doctorIv = (UIImageView *)[cell viewWithTag:1];
-    [doctorIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatarThumbnail?id=%i", baseUrl, [[[[self.bookResults objectAtIndex:indexPath.row] doctor] avatar] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    [doctorIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatarThumbnail?id=%d", baseUrl, [[[[self.bookResults objectAtIndex:indexPath.row] doctor] image] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     
     doctorIv.layer.cornerRadius = doctorIv.frame.size.width / 2;
     doctorIv.clipsToBounds = YES;

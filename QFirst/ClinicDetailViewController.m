@@ -11,23 +11,20 @@
 #import "DoctorCell.h"
 #import "Utils.h"
 #import "MozTopAlertView.h"
+#import "DBImage.h"
 #import "UILabel+DynamicSize.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "User.h"
+#import "DBUser+CoreDataProperties.h"
 #import "ConstantValues.h"
 #import "AppDelegate.h"
 #import "TimelineViewController.h"
 #import "DoctorDetailViewController.h"
-
-#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
 @interface ClinicDetailViewController (){
     NSLayoutConstraint *topContraint;
     CGPoint tempContentOffset;
     int doctorContainerHeight;
     bool isFirstLoad;
-    bool isQuick;
-    Clinic *dbClinic;
 }
 
 @end
@@ -47,12 +44,14 @@
 @synthesize queueBtn;
 @synthesize clinic;
 @synthesize bookmarkBtn;
+@synthesize doctorArray;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    doctorArray = [clinic.users allObjects];
+    
     isFirstLoad = true;
-    isQuick = false;
     
     descLbl.text = clinic.desc;
     clinicName.text = clinic.name;
@@ -62,7 +61,7 @@
     clinicLogo.layer.cornerRadius = self.clinicLogo.frame.size.width / 2;
     clinicLogo.clipsToBounds = YES;
     clinicLogo.layer.masksToBounds = YES;
-    [clinicLogo sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ClinicController/showClinicThumbnailLogo?id=%i", baseUrl, [[clinic logo] entityId]]]];
+    [clinicLogo sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ClinicController/showClinicThumbnailLogo?id=%@", baseUrl, [[clinic image] entityId]]]];
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
@@ -99,8 +98,13 @@
                                                           timestamp:[NSDate date]];
         
         MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(locObj.coordinate, 800, 800);
-        [self.clinicMapView setRegion:region animated:YES];
         
+        @try{
+            [self.clinicMapView setRegion:region animated:YES];
+        }@catch(NSException *e){
+            NSLog(@"Region Error:%@ ", e);
+        }
+
         MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
         annotation.coordinate = CLLocationCoordinate2DMake([clinic.latitude doubleValue], [clinic.longitude doubleValue]);
         annotation.title = clinic.name;
@@ -113,8 +117,7 @@
 }
 
 -(void) checkBookmark{
-    dbClinic = [clinic retrieve];
-    if(dbClinic){
+    if(clinic.isBookmark.boolValue == YES){
         [bookmarkBtn setBackgroundImage:[UIImage imageNamed:@"star_filled"] forState:UIControlStateNormal];
     }
 }
@@ -122,12 +125,6 @@
 -(void) loadMapView{
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
-    
-#ifdef __IPHONE_8_0
-    if(IS_OS_8_OR_LATER) {
-        [self.locationManager requestWhenInUseAuthorization];
-    }
-#endif
     [self.locationManager startUpdatingLocation];
     
     clinicMapView.showsUserLocation = YES;
@@ -145,9 +142,9 @@
 }
 
 -(void) setupDoctorCells{
-    if(clinic.isCoop){
-        if(clinic.doctors.count > 0){
-            for(int i = 0; i < [clinic.doctors count]; i++){
+    if(clinic.isCoop.boolValue){
+        if(doctorArray.count > 0){
+            for(int i = 0; i < [doctorArray count]; i++){
                 UIView *spiltor = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, i * 73, self.view.frame.size.width, 1)];
                 [spiltor setBackgroundColor:[Utils colorFromHexString:@"#EFEFF4"]];
                 [self.doctorContainer addSubview:spiltor];
@@ -159,11 +156,11 @@
                 avatarIV.clipsToBounds = YES;
                 avatarIV.contentMode = UIViewContentModeScaleAspectFill;
                 avatarIV.layer.masksToBounds = YES;
-                [avatarIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatarThumbnail?id=%i", baseUrl, [[[clinic.doctors objectAtIndex:i] avatar] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+                [avatarIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatarThumbnail?id=%@", baseUrl, [[[doctorArray objectAtIndex:i] image] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
                 [doctorCell addSubview:avatarIV];
                 
                 UILabel *nameLbl = [[UILabel alloc]initWithFrame:CGRectMake(64, 25, self.view.frame.size.width - 152, 22)];
-                nameLbl.text = [[clinic.doctors objectAtIndex:i] name];
+                nameLbl.text = [[doctorArray objectAtIndex:i] name];
                 nameLbl.numberOfLines = 1;
                 nameLbl.clipsToBounds = YES;
                 nameLbl.backgroundColor = [UIColor clearColor];
@@ -187,8 +184,8 @@
                 
                 doctorContainerHeight += spiltor.frame.size.height + doctorCell.frame.size.height;
                 
-                if(i == [clinic.doctors count] - 1) {
-                    UIView *bottomSpiltor = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, [clinic.doctors count] * 72 + [clinic.doctors count] + 1, self.view.frame.size.width, 1)];
+                if(i == [doctorArray count] - 1) {
+                    UIView *bottomSpiltor = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, [doctorArray count] * 72 + [doctorArray count] + 1, self.view.frame.size.width, 1)];
                     [bottomSpiltor setBackgroundColor:[Utils colorFromHexString:@"#EFEFF4"]];
                     [self.doctorContainer addSubview:bottomSpiltor];
                     
@@ -287,19 +284,24 @@
 }
 
 - (IBAction)quickBtnClicked:(id)sender {
-    isQuick = true;
-    [self performSegueWithIdentifier:@"segue_book" sender:sender];
+    if([Utils IsEmpty:clinic.users] || clinic.users.count == 0){
+        [MozTopAlertView showWithType:MozAlertTypeError text:@"No reservation service." doText:nil doBlock:nil parentView:self.view];
+        return;
+    }
+    [self performSegueWithIdentifier:@"segue_quick_book" sender:sender];
 }
 
 - (IBAction)bookmarkBtnClicked:(id)sender {
-    if(dbClinic){
+    if(clinic.isBookmark.boolValue){
         [bookmarkBtn setBackgroundImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
-        [dbClinic delele];
-        dbClinic = nil;
+        clinic.isBookmark = [NSNumber numberWithBool:NO];
     }else{
         [bookmarkBtn setBackgroundImage:[UIImage imageNamed:@"star_filled"] forState:UIControlStateNormal];
-        dbClinic = [clinic createDBClinicByOriginal];
+        clinic.isBookmark = [NSNumber numberWithBool:YES];
     }
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate saveContext];
 }
 
 - (void)reserveBtnClicked:(id) sender{
@@ -318,7 +320,6 @@
     if(descLbl.alpha == 1){
         [self toggleView:descLbl];
     }
-    [self performSegueWithIdentifier:@"segue_book" sender:nil];
 }
 
 -(void) login{
@@ -338,14 +339,12 @@
         UIButton *reserveBtn = (UIButton *) sender;
         TimelineViewController *timelineVC = [segue destinationViewController];
         timelineVC.clinicName = [clinic name];
-        timelineVC.doctor = [clinic.doctors objectAtIndex: [reserveBtn tag]];
-    }else if([[segue identifier] isEqualToString:@"segue_book"]){
-        if(isQuick){
-            DoctorDetailViewController *doctorDetailVC = [segue destinationViewController];
-            doctorDetailVC.doctor = [clinic.doctors objectAtIndex: 0];
-            doctorDetailVC.clinicName = [clinic name];
-            doctorDetailVC.datetimeString = @"2016-06-09 16:00:00";
-        }
+        timelineVC.doctor = [doctorArray objectAtIndex: [reserveBtn tag]];
+    }else if([[segue identifier] isEqualToString:@"segue_quick_book"]){
+        DoctorDetailViewController *doctorDetailVC = [segue destinationViewController];
+        doctorDetailVC.clinic = clinic;
+        doctorDetailVC.isQuickMode = true;
+        doctorDetailVC.datetime = [[NSDate date] timeIntervalSince1970];
     }
 }
 

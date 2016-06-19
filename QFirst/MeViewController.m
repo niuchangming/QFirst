@@ -15,6 +15,7 @@
 #import <JGProgressHUD/JGProgressHUD.h>
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 #import "SDWebImage/UIImageView+WebCache.h"
+#import "DBImage.h"
 
 @interface MeViewController (){
     UILabel *mobileLbl;
@@ -179,8 +180,8 @@
 }
 
 -(void) setValueForViews{
-    [bgImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatarThumbnail?id=%i", baseUrl, [user.avatar entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-    [userAvatarIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatarThumbnail?id=%i", baseUrl, [user.avatar entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    [bgImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatarThumbnail?id=%d", baseUrl, [user.image entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    [userAvatarIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatarThumbnail?id=%d", baseUrl, [user.image entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     
     NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
     nameLbl.attributedText = [[NSAttributedString alloc] initWithString:user.name attributes:underlineAttribute];
@@ -206,7 +207,12 @@
     }
     
     if(![Utils IsEmpty:user.ic]){
-        icLbl.text = user.ic;
+        if([user.ic length] == 9) {
+            NSString *modifiedStr = [user.ic substringToIndex:6];
+            icLbl.text = [NSString stringWithFormat:@"%@%@", modifiedStr, @"***"];
+        }else{
+            icLbl.text = user.ic;
+        }
     }
     
     if(user.patientReservations.count > 0){

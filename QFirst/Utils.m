@@ -9,8 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "Utils.h"
 #import "ConstantValues.h"
+#import "Reachability.h"
 
 @implementation Utils
+
++ (BOOL)connected{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
 
 + (UIColor *)colorFromHexString:(NSString *)hexString {
     unsigned rgbValue = 0;
@@ -61,12 +68,6 @@
     return [phoneTest evaluateWithObject:mobileNumber];
 }
 
-+ (void)displayError:(NSString *)displayText{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:displayText
-                                                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
-}
-
 + (NSString*) accessToken{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString * accessToken = [defaults objectForKey:@"access_token"];
@@ -113,9 +114,7 @@
 
 +(NSString *) getTimeString: (NSDate*) date{
     NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
-    [dateFormater setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     [dateFormater setDateFormat:@"HH:mm"];
-    
     return [dateFormater stringFromDate:date];
 }
 
@@ -132,11 +131,14 @@
 }
 
 +(NSDate*) getStartDate: (NSDate *) date{
-    NSCalendar * gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    [gregorian setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-    NSDateComponents *components = [gregorian components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:[NSDate date]];
-    [components setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-    return [gregorian dateFromComponents:components];
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *components = [cal components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
+    
+    [components setHour:0];
+    [components setMinute:0];
+    [components setSecond:0];
+    
+    return [cal dateFromComponents:components];
 }
 
 

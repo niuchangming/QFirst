@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBClinic.h"
 
 @interface ClinicSearchResultTableViewController : UITableViewController
 
-@property (nonatomic, strong) NSMutableArray *clinicResults;
+@property (nonatomic, strong) NSMutableArray<DBClinic *> *clinicResults;
 
 @end

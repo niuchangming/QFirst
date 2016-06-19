@@ -11,13 +11,13 @@
 
 @interface Utils : NSObject
 
++ (BOOL)connected;
+
 + (UIColor *)colorFromHexString:(NSString *)hexString;
 
 + (CGRect)screenBounds;
 
 + (BOOL) IsEmpty:(id)thing;
-
-+ (void)displayError:(NSString *)displayText;
 
 + (NSString*) accessToken;
 

@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <MapKit/MKAnnotation.h>
-#import "Clinic.h"
+#import "DBClinic.h"
+#import "DBUser.h"
 #import "LoginViewController.h"
 #import "MozTopAlertView.h"
 
@@ -27,7 +28,8 @@
 @property (weak, nonatomic) IBOutlet UIView *doctorContainer;
 @property (strong, nonatomic) UIButton *queueBtn;
 @property (weak, nonatomic) IBOutlet UIButton *bookmarkBtn;
-@property (strong, nonatomic) Clinic *clinic;
+@property (strong, nonatomic) DBClinic *clinic;
+@property (strong, nonatomic) NSArray<DBUser *> *doctorArray;
 
 - (IBAction)expandArrowBtnClicked:(id)sender;
 - (IBAction)quickBtnClicked:(id)sender;

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Reservation.h"
 
 @interface BookHistorySearchTableViewController : UITableViewController
 
-@property (nonatomic, strong) NSMutableArray *bookResults;
+@property (nonatomic, strong) NSMutableArray<Reservation*> *bookResults;
 
 @end

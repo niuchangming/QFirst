@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import <JTCalendar/JTCalendar.h>
-#import "User.h"
+#import "DBUser.h"
 #import "DoctorDetailViewController.h"
 
 @interface TimelineViewController : UIViewController<JTCalendarDelegate, UITabBarDelegate, UITableViewDataSource, ReserveDelegate>
@@ -18,7 +18,7 @@
 @property (strong, nonatomic) JTCalendarManager *calendarManager;
 @property (weak, nonatomic) IBOutlet UITableView *timetable;
 
-@property (strong, nonatomic) User *doctor;
+@property (strong, nonatomic) DBUser *doctor;
 @property (strong, nonatomic) NSString *clinicName;
 
 @property (strong, nonatomic) NSIndexPath *expandedIndexPath;

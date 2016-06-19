@@ -7,7 +7,7 @@
 //
 
 #import "BookHistoryViewController.h"
-#import "BookmarkSearchResultTableViewController.h"
+#import "BookHistorySearchTableViewController.h"
 #import <JGProgressHUD/JGProgressHUD.h>
 #import "ConstantValues.h"
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
@@ -16,7 +16,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "Reservation.h"
 #import "MozTopAlertView.h"
-#import "User.h"
+#import "DBUser.h"
 
 @interface BookHistoryViewController ()
 
@@ -45,7 +45,7 @@
 }
 
 -(void) initSearchBarController{
-    UINavigationController *searchResultsController = [[self storyboard] instantiateViewControllerWithIdentifier:@"BookHistorySearchTableViewController"];
+    UINavigationController *searchResultsController = [[self storyboard] instantiateViewControllerWithIdentifier:@"BookHistorySearchNavController"];
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:searchResultsController];
     self.searchController.searchResultsUpdater = self;
     self.searchController.searchBar.frame = CGRectMake(self.searchController.searchBar.frame.origin.x, self.searchController.searchBar.frame.origin.y, self.searchController.searchBar.frame.size.width, 44.0);
@@ -109,7 +109,7 @@
     }
     
     UIImageView *avatarIv = (UIImageView *)[cell viewWithTag:1];
-    [avatarIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatarThumbnail?id=%i", baseUrl, [[[reservations objectAtIndex:indexPath.row] doctor] entityId]]]];
+    [avatarIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatarThumbnail?id=%@", baseUrl, [[[reservations objectAtIndex:indexPath.row] doctor] entityId]]]];
     
     avatarIv.layer.cornerRadius = avatarIv.frame.size.width / 2;
     avatarIv.clipsToBounds = YES;
@@ -140,7 +140,7 @@
     if (self.searchController.searchResultsController) {
         UINavigationController *navController = (UINavigationController *)self.searchController.searchResultsController;
         
-        BookmarkSearchResultTableViewController *vc = (BookmarkSearchResultTableViewController *)navController.topViewController;
+        BookHistorySearchTableViewController *vc = (BookHistorySearchTableViewController *)navController.topViewController;
         vc.bookResults = self.searchResults;
         [vc.tableView reloadData];
     }

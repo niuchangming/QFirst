@@ -7,7 +7,7 @@
 //
 
 #import "ClinicSearchResultTableViewController.h"
-#import "Clinic.h"
+#import "DBClinic+CoreDataProperties.h"
 #import "Utils.h"
 #import "ConstantValues.h"
 #import "ClinicDetailViewController.h"
@@ -50,7 +50,7 @@
     }
     
     UIImageView *clinicLogoIv = (UIImageView *)[cell viewWithTag:1];
-    [clinicLogoIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ClinicController/showClinicThumbnailLogo?id=%i", baseUrl, [[self.clinicResults objectAtIndex:indexPath.row] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    [clinicLogoIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ClinicController/showClinicThumbnailLogo?id=%@", baseUrl, [[self.clinicResults objectAtIndex:indexPath.row] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     
     clinicLogoIv.layer.cornerRadius = clinicLogoIv.frame.size.width / 2;
     clinicLogoIv.clipsToBounds = YES;
@@ -72,7 +72,7 @@
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    Clinic *clinic = [self.clinicResults objectAtIndex:indexPath.row];
+    DBClinic *clinic = [self.clinicResults objectAtIndex:indexPath.row];
     ClinicDetailViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"ClinicDetailViewController"];
     vc.clinic = clinic;
     [self.presentingViewController.navigationController pushViewController:vc animated:YES];

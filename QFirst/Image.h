@@ -1,13 +1,12 @@
 //
 //  Image.h
-//  Task
+//  QFirst
 //
-//  Created by Niu Changming on 21/8/15.
-//  Copyright (c) 2015 Ekoo Lab. All rights reserved.
+//  Created by ChangmingNiu on 19/6/16.
+//  Copyright © 2016 EKOO LAB PTE. LTD. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
 
 @interface Image : NSObject
 

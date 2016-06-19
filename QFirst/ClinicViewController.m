@@ -7,11 +7,13 @@
 //
 
 #import "ClinicViewController.h"
-#import "Clinic.h"
+#import "DBClinic.h"
+#import "AppDelegate.h"
 #import "Utils.h"
+#import "DBImage.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ClinicDetailViewController.h"
-#import "User.h"
+#import "DBUser.h"
 #import <JGProgressHUD/JGProgressHUD.h>
 #import "ConstantValues.h"
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
@@ -19,20 +21,17 @@
 #import "ClinicSearchResultTableViewController.h"
 #import "LocationService.h"
 
+#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+
 @interface ClinicViewController (){
     NSIndexPath *indexPathForSelectedRow;
     UIBarButtonItem *rightButton;
-    CLLocation * location;
+    AppDelegate *appDelegate;
 }
 
 @end
 
 @implementation ClinicViewController
-
-@synthesize searchController;
-@synthesize clinicTV;
-@synthesize clinicArray;
-@synthesize searchResults;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,16 +41,27 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
-    if ([clinicTV respondsToSelector:@selector(setLayoutMargins:)]) {
-        [clinicTV setLayoutMargins:UIEdgeInsetsZero];
+    appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    if ([self.clinicTV respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.clinicTV setLayoutMargins:UIEdgeInsetsZero];
     }
-    clinicTV.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.clinicTV.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     [self initSearchBarController];
     
     [self loadClinics];
     
-    location = [LocationService sharedInstance].currentLocation;
+    LocationService *locationService = [LocationService sharedInstance];
+#ifdef __IPHONE_8_0
+    if(IS_OS_8_OR_LATER) {
+        [locationService.locationManager requestWhenInUseAuthorization];
+    }
+#endif
+    locationService.delegate = self;
+    [locationService startUpdatingLocation];
+    
+    [self storeLastUpdateInfo];
 }
 
 -(void) initSearchBarController{
@@ -64,29 +74,61 @@
 }
 
 -(void) loadClinics{
+    self.clinicArray = [DBClinic retrieveAll];
+    if(![Utils connected]){
+        [self.clinicTV reloadData];
+    }else{
+        [self loadClinicOnline];
+    }
+}
+
+-(void) loadClinicOnline{
     JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleExtraLight];
     [HUD showInView:self.navigationController.view];
     
-    NSString *url = [NSString stringWithFormat:@"%@ClinicController/clinics", baseUrl];
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    long long lastUpdateTime = [[userDefault objectForKey:@"last_update"] longLongValue];
+    
+    NSMutableDictionary *params = nil;
+    if(lastUpdateTime != 0){
+        params = [NSMutableDictionary dictionary];
+        [params setObject:[NSNumber numberWithLongLong:lastUpdateTime] forKey: @"lastSyncDatetime"];
+    }
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"%@ClinicController/clinics", baseUrl] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]] == YES){
             NSDictionary *obj = (NSDictionary *)responseObject;
             NSString *errMsg = [obj valueForKey:@"error"];
             [MozTopAlertView showWithType:MozAlertTypeError text:errMsg doText:nil doBlock:nil parentView:self.view];
         }else if ([responseObject isKindOfClass:[NSArray class]] == YES){
             NSArray *array = (NSArray*) responseObject;
-            clinicArray = [[NSMutableArray alloc] init];
             for(NSDictionary *data in array){
-                Clinic *clinic = [[Clinic alloc]initWithJson:data];
-                [clinicArray addObject:clinic];
+                bool isBookmark = false;
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"entityId = %@", [data valueForKey:@"entityId"]];
+                NSMutableArray *oldClinics = [DBClinic retrieveBy:predicate];
+                if(oldClinics != nil){
+                    for(DBClinic *clinic in oldClinics) {
+                        isBookmark = clinic.isBookmark;
+                        [self.clinicArray removeObject:clinic];
+                        [clinic delele];
+                    }
+                }
+            
+                DBClinic *clinic = [[DBClinic alloc]initWithJson:data];
+                clinic.isBookmark = [NSNumber numberWithBool:isBookmark];
+                [self.clinicArray addObject:clinic];
             }
-            self.searchResults = [NSMutableArray arrayWithCapacity:[clinicArray count]];
-            [clinicTV reloadData];
+            
+            [appDelegate saveContext];
+            [self storeLastUpdateInfo];
+            
+            self.searchResults = [NSMutableArray arrayWithCapacity:[self.clinicArray count]];
+            [self.clinicTV reloadData];
         }else{
             [MozTopAlertView showWithType:MozAlertTypeError text:@"Unknown error." doText:nil doBlock:nil parentView:self.view];
         }
+        
         [HUD dismissAnimated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MozTopAlertView showWithType:MozAlertTypeError text:[error localizedDescription] doText:nil doBlock:nil parentView:self.view];
@@ -94,12 +136,19 @@
     }];
 }
 
+-(void) storeLastUpdateInfo{
+    NSTimeInterval lastUpdate = [[NSDate date] timeIntervalSince1970] * 1000;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSNumber numberWithLongLong:lastUpdate] forKey:@"last_update"];
+    [defaults synchronize];
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return clinicArray.count;
+    return self.clinicArray.count;
 }
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -111,23 +160,17 @@
     }
     
     UIImageView *clinicLogoIv = (UIImageView *)[cell viewWithTag:1];
-    [clinicLogoIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ClinicController/showClinicThumbnailLogo?id=%i", baseUrl, [[[clinicArray objectAtIndex:indexPath.row] logo] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    [clinicLogoIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ClinicController/showClinicThumbnailLogo?id=%@", baseUrl, [[[self.clinicArray objectAtIndex:indexPath.row] image] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     
     clinicLogoIv.layer.cornerRadius = clinicLogoIv.frame.size.width / 2;
     clinicLogoIv.clipsToBounds = YES;
     clinicLogoIv.layer.masksToBounds = YES;
     
     UILabel *nameLbl = (UILabel *)[cell viewWithTag:2];
-    nameLbl.text = [[clinicArray objectAtIndex:indexPath.row] name];
+    nameLbl.text = [[self.clinicArray objectAtIndex:indexPath.row] name];
     
-    double latitude = [[[clinicArray objectAtIndex:indexPath.row] latitude] doubleValue];
-    double longtitude = [[[clinicArray objectAtIndex:indexPath.row] longitude] doubleValue];
-    
-    CLLocation *clinicLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longtitude];
-    CLLocationDistance distance = [location distanceFromLocation:clinicLocation];
-
     UILabel *distanceLbl = (UILabel *)[cell viewWithTag:3];
-    distanceLbl.text = [NSString stringWithFormat:@"%.1fkm", distance];
+    distanceLbl.text = [NSString stringWithFormat:@"%.1fkm", [self.clinicArray objectAtIndex:indexPath.row].distance / 1000];
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
@@ -141,7 +184,7 @@
     if ([segue.identifier isEqualToString:@"segue_clinicdetail"]) {
         NSIndexPath *indexPath = [self.clinicTV indexPathForSelectedRow];
         ClinicDetailViewController *clinicDetailVC = segue.destinationViewController;
-        clinicDetailVC.clinic = [clinicArray objectAtIndex:indexPath.row];
+        clinicDetailVC.clinic = [self.clinicArray objectAtIndex:indexPath.row];
     }
 }
 
@@ -187,7 +230,7 @@
     
     [self.searchResults removeAllObjects];
 
-    for (Clinic *clinic in clinicArray) {
+    for (DBClinic *clinic in self.clinicArray) {
         NSUInteger searchOptions = NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch;
         NSRange nameRange = NSMakeRange(0, clinic.name.length);
         NSRange foundRange = [clinic.name rangeOfString:name options:searchOptions range:nameRange];
@@ -195,6 +238,30 @@
             [self.searchResults addObject:clinic];
         }
     }
+}
+
+-(void) locationUpdated:(CLLocation *)location{
+    if(self.location == nil){
+        self.location = location;
+        [self updateClinicDistances];
+    }
+}
+
+-(void) updateClinicDistances{
+    for (DBClinic *clinic in self.clinicArray) {
+        CLLocation *clinicLocation = [[CLLocation alloc] initWithLatitude:[[clinic latitude] doubleValue] longitude:[[clinic longitude] doubleValue]];
+        CLLocationDistance distance = [self.location distanceFromLocation:clinicLocation];
+        clinic.distance = distance;
+    }
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"distance" ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortedArray = [self.clinicArray sortedArrayUsingDescriptors:sortDescriptors];
+    
+    [self.clinicArray removeAllObjects];
+    [self.clinicArray addObjectsFromArray:sortedArray];
+    
+    [self.clinicTV reloadData];
 }
 
 @end

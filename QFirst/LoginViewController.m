@@ -12,7 +12,7 @@
 #import "PasscodeView.h"
 #import "Utils.h"
 #import "ConstantValues.h"
-#import "User.h"
+#import "DBUser.h"
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 
 @interface LoginViewController ()
@@ -126,7 +126,7 @@
         if(![Utils IsEmpty:errMsg]) {
             [MozTopAlertView showWithType:MozAlertTypeError text:errMsg doText:nil doBlock:nil parentView:self.view];
         }else{
-            User *user = [[User alloc] initWithJson:obj];
+            DBUser *user = [[DBUser alloc] initWithJson:obj];
             [self storeUserInfo:user];
             [delegate loginComplete:nil];
             [self cancelBtnClicked:nil];
@@ -136,12 +136,12 @@
     }
 }
 
--(void) storeUserInfo: (User *) user{
+-(void) storeUserInfo: (DBUser *) user{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:user.accessToken forKey:@"access_token"];
     [defaults setObject:user.mobile forKey:@"mobile"];
     [defaults setBool:user.isActive forKey:@"is_active"];
-    [defaults setInteger:user.entityId forKey:@"entity_id"];
+    [defaults setInteger:[user.entityId intValue] forKey:@"entity_id"];
     [defaults setObject:user.role forKey:@"role"];
     [defaults synchronize];
 }

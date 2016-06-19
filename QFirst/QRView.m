@@ -81,7 +81,7 @@ static NSTimeInterval kQrLineanimateDuration = 0.02;
     [UIView animateWithDuration:kQrLineanimateDuration animations:^{
         
         CGRect rect = qrLine.frame;
-        rect.origin.y = qrLineY;
+        rect.origin.y = qrLineY - 64;
         qrLine.frame = rect;
         
     } completion:^(BOOL finished) {
@@ -103,7 +103,7 @@ static NSTimeInterval kQrLineanimateDuration = 0.02;
     
     //中间清空的矩形框
     CGRect clearDrawRect = CGRectMake(screenDrawRect.size.width / 2 - self.transparentArea.width / 2,
-                                      screenDrawRect.size.height / 2 - self.transparentArea.height / 2,
+                                      screenDrawRect.size.height / 2 - self.transparentArea.height / 2 - 64,
                                       self.transparentArea.width,self.transparentArea.height);
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
@@ -142,7 +142,7 @@ static NSTimeInterval kQrLineanimateDuration = 0.02;
     
     //画四个边角
     CGContextSetLineWidth(ctx, 2);
-    CGContextSetRGBStrokeColor(ctx, 83 /255.0, 239/255.0, 111/255.0, 1);//绿色
+    CGContextSetRGBStrokeColor(ctx, 25 /255.0, 176/255.0, 236/255.0, 1);//绿色
     
     //左上角
     CGPoint poinsTopLeftA[] = {

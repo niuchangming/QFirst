@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "FXBlurView.h"
-#import "User.h"
+#import "DBUser.h"
+#import "DBImage.h"
 #import "LoginViewController.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @protocol ReserveDelegate <NSObject>
 
@@ -20,9 +23,10 @@
 
 @interface DoctorDetailViewController : UIViewController<LoginViewControllerDelegate>
 
-@property (strong, nonatomic) User *doctor;
-@property (strong, nonatomic) NSString *clinicName;
-@property (strong, nonatomic) NSString *datetimeString;
+@property (nonnull,strong, nonatomic) DBUser *doctor;
+@property (strong, nonnull) DBClinic *clinic;
+@property NSTimeInterval datetime;
+@property bool isQuickMode;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (weak, nonatomic) IBOutlet FXBlurView *blurView;
@@ -40,8 +44,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *emailTf;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTf;
 @property (weak, nonatomic) IBOutlet UITextField *iCard;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *nextBtn;
 
 @property (weak, nonatomic) id<ReserveDelegate> delegate;
+- (IBAction)nextBtnClicked:(id)sender;
 
 - (IBAction)submitBtnClicked:(id)sender;
 @end
+
+NS_ASSUME_NONNULL_END

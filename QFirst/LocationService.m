@@ -44,6 +44,11 @@
     NSLog(@"Latitude %+.6f, Longitude %+.6f\n",
           location.coordinate.latitude,
           location.coordinate.longitude);
+    
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(locationUpdated:)]){
+        [self.delegate locationUpdated:location];
+    }
+    
     self.currentLocation = location;
 }
 

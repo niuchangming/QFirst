@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBClinic.h"
 
 @interface BookmarkSearchResultTableViewController : UITableViewController
 
-@property (nonatomic, strong) NSMutableArray *bookResults;
+@property (nonatomic, strong) NSMutableArray<DBClinic*> *clinicResults;
 
 @end
