@@ -104,20 +104,21 @@
         }else if ([responseObject isKindOfClass:[NSArray class]] == YES){
             NSArray *array = (NSArray*) responseObject;
             for(NSDictionary *data in array){
-                bool isBookmark = false;
                 NSPredicate *predicate = [NSPredicate predicateWithFormat:@"entityId = %@", [data valueForKey:@"entityId"]];
                 NSMutableArray *oldClinics = [DBClinic retrieveBy:predicate];
+                
+                DBClinic *newClinic = [[DBClinic alloc]initWithJson:data];
+                
                 if(oldClinics != nil){
-                    for(DBClinic *clinic in oldClinics) {
-                        isBookmark = clinic.isBookmark;
-                        [self.clinicArray removeObject:clinic];
-                        [clinic delele];
+                    for(DBClinic *oldClinic in oldClinics) {
+                        newClinic.isBookmark = oldClinic.isBookmark;
+                        [self.clinicArray removeObject:oldClinic];
+                        
+                        NSManagedObjectContext *context = [appDelegate managedObjectContext];
+                        [context deleteObject:oldClinic];
                     }
                 }
-            
-                DBClinic *clinic = [[DBClinic alloc]initWithJson:data];
-                clinic.isBookmark = [NSNumber numberWithBool:isBookmark];
-                [self.clinicArray addObject:clinic];
+                [self.clinicArray addObject:newClinic];
             }
             
             [appDelegate saveContext];
@@ -160,7 +161,12 @@
     }
     
     UIImageView *clinicLogoIv = (UIImageView *)[cell viewWithTag:1];
-    [clinicLogoIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ClinicController/showClinicThumbnailLogo?id=%@", baseUrl, [[[self.clinicArray objectAtIndex:indexPath.row] image] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    
+    if([[[self.clinicArray objectAtIndex:indexPath.row] images] count] > 0){
+        [clinicLogoIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ClinicController/showClinicThumbnailLogo?id=%@", baseUrl, [[[[[self.clinicArray objectAtIndex:indexPath.row] images] allObjects] objectAtIndex:0] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    }else{
+        [clinicLogoIv setImage:[UIImage imageNamed:@"default_avatar"]];
+    }
     
     clinicLogoIv.layer.cornerRadius = clinicLogoIv.frame.size.width / 2;
     clinicLogoIv.clipsToBounds = YES;

@@ -10,6 +10,20 @@
 		2F35AA0ABF110E607471B062 /* Pods_QFirst.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F522DE2272FADC61A2F3F694 /* Pods_QFirst.framework */; };
 		FB38A1C11D15B13200BA6CCF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FB38A1C01D15B13200BA6CCF /* User.m */; };
 		FB38A1C41D15B1FE00BA6CCF /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = FB38A1C31D15B1FE00BA6CCF /* Image.m */; };
+		FB38A1CA1D16BFF900BA6CCF /* InsetTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = FB38A1C91D16BFF900BA6CCF /* InsetTextField.m */; };
+		FB38A1CD1D16C07F00BA6CCF /* EditMeInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB38A1CC1D16C07F00BA6CCF /* EditMeInfoViewController.m */; };
+		FB38A1D01D16D14E00BA6CCF /* DataTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = FB38A1CF1D16D14E00BA6CCF /* DataTapGestureRecognizer.m */; };
+		FB418FA31D1AD67500FCB369 /* HZSigmentScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB418FA01D1AD67500FCB369 /* HZSigmentScrollView.m */; };
+		FB418FA41D1AD67500FCB369 /* HZSigmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB418FA21D1AD67500FCB369 /* HZSigmentView.m */; };
+		FB418FA71D1ADAD400FCB369 /* CurrentBookHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB418FA61D1ADAD400FCB369 /* CurrentBookHistoryViewController.m */; };
+		FB418FAA1D1ADAEB00FCB369 /* ExpiredBookHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB418FA91D1ADAEB00FCB369 /* ExpiredBookHistoryViewController.m */; };
+		FBA5738F1D1C35A3009132D4 /* Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA5738E1D1C35A3009132D4 /* Queue.m */; };
+		FBA573921D1C369E009132D4 /* Clinic.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA573911D1C369E009132D4 /* Clinic.m */; };
+		FBA573951D1D39D3009132D4 /* QueueHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA573941D1D39D3009132D4 /* QueueHistoryViewController.m */; };
+		FBA573981D1D8228009132D4 /* CurrentQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA573971D1D8228009132D4 /* CurrentQueueViewController.m */; };
+		FBA5739B1D1D8268009132D4 /* UsedQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA5739A1D1D8268009132D4 /* UsedQueueViewController.m */; };
+		FBA5739E1D1E293A009132D4 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA5739D1D1E293A009132D4 /* ForgotPasswordView.m */; };
+		FBA573A01D1E2952009132D4 /* ForgotPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBA5739F1D1E2952009132D4 /* ForgotPasswordView.xib */; };
 		FBD660801D157BCE0026FF70 /* qfirst.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FBD6607E1D157BCE0026FF70 /* qfirst.xcdatamodeld */; };
 		FBD660871D1585070026FF70 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD660861D1585070026FF70 /* Reachability.m */; };
 		FBD660941D15A4F40026FF70 /* DBClinic+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD660891D15A4F40026FF70 /* DBClinic+CoreDataProperties.m */; };
@@ -55,7 +69,6 @@
 		FBE9DDD41D0D0CE20057623B /* ConstantValues.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDD11D0D0CE20057623B /* ConstantValues.m */; };
 		FBE9DDD51D0D0CE20057623B /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDD31D0D0CE20057623B /* Utils.m */; };
 		FBE9DDDB1D0D20E00057623B /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDDA1D0D20E00057623B /* LocationService.m */; };
-		FBE9DDE11D0DBA3F0057623B /* BookHistorySearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDE01D0DBA3F0057623B /* BookHistorySearchTableViewController.m */; };
 		FBE9DE0D1D0EDF9C0057623B /* Reservation.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DDFF1D0EDF9C0057623B /* Reservation.m */; };
 		FBE9DE161D0EE4920057623B /* TimeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE9DE151D0EE4920057623B /* TimeLine.m */; };
 /* End PBXBuildFile section */
@@ -68,6 +81,33 @@
 		FB38A1C01D15B13200BA6CCF /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		FB38A1C21D15B1FE00BA6CCF /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		FB38A1C31D15B1FE00BA6CCF /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
+		FB38A1C81D16BFF900BA6CCF /* InsetTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsetTextField.h; sourceTree = "<group>"; };
+		FB38A1C91D16BFF900BA6CCF /* InsetTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsetTextField.m; sourceTree = "<group>"; };
+		FB38A1CB1D16C07F00BA6CCF /* EditMeInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditMeInfoViewController.h; sourceTree = "<group>"; };
+		FB38A1CC1D16C07F00BA6CCF /* EditMeInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditMeInfoViewController.m; sourceTree = "<group>"; };
+		FB38A1CE1D16D14E00BA6CCF /* DataTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataTapGestureRecognizer.h; sourceTree = "<group>"; };
+		FB38A1CF1D16D14E00BA6CCF /* DataTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataTapGestureRecognizer.m; sourceTree = "<group>"; };
+		FB418F9F1D1AD67500FCB369 /* HZSigmentScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZSigmentScrollView.h; sourceTree = "<group>"; };
+		FB418FA01D1AD67500FCB369 /* HZSigmentScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZSigmentScrollView.m; sourceTree = "<group>"; };
+		FB418FA11D1AD67500FCB369 /* HZSigmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZSigmentView.h; sourceTree = "<group>"; };
+		FB418FA21D1AD67500FCB369 /* HZSigmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZSigmentView.m; sourceTree = "<group>"; };
+		FB418FA51D1ADAD400FCB369 /* CurrentBookHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentBookHistoryViewController.h; sourceTree = "<group>"; };
+		FB418FA61D1ADAD400FCB369 /* CurrentBookHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentBookHistoryViewController.m; sourceTree = "<group>"; };
+		FB418FA81D1ADAEB00FCB369 /* ExpiredBookHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpiredBookHistoryViewController.h; sourceTree = "<group>"; };
+		FB418FA91D1ADAEB00FCB369 /* ExpiredBookHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpiredBookHistoryViewController.m; sourceTree = "<group>"; };
+		FBA5738D1D1C35A3009132D4 /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
+		FBA5738E1D1C35A3009132D4 /* Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Queue.m; sourceTree = "<group>"; };
+		FBA573901D1C369E009132D4 /* Clinic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clinic.h; sourceTree = "<group>"; };
+		FBA573911D1C369E009132D4 /* Clinic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Clinic.m; sourceTree = "<group>"; };
+		FBA573931D1D39D3009132D4 /* QueueHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueueHistoryViewController.h; sourceTree = "<group>"; };
+		FBA573941D1D39D3009132D4 /* QueueHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueueHistoryViewController.m; sourceTree = "<group>"; };
+		FBA573961D1D8228009132D4 /* CurrentQueueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentQueueViewController.h; sourceTree = "<group>"; };
+		FBA573971D1D8228009132D4 /* CurrentQueueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentQueueViewController.m; sourceTree = "<group>"; };
+		FBA573991D1D8268009132D4 /* UsedQueueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsedQueueViewController.h; sourceTree = "<group>"; };
+		FBA5739A1D1D8268009132D4 /* UsedQueueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsedQueueViewController.m; sourceTree = "<group>"; };
+		FBA5739C1D1E293A009132D4 /* ForgotPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordView.h; sourceTree = "<group>"; };
+		FBA5739D1D1E293A009132D4 /* ForgotPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordView.m; sourceTree = "<group>"; };
+		FBA5739F1D1E2952009132D4 /* ForgotPasswordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgotPasswordView.xib; sourceTree = "<group>"; };
 		FBD6607F1D157BCE0026FF70 /* qfirst.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = qfirst.xcdatamodel; sourceTree = "<group>"; };
 		FBD660851D1585070026FF70 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		FBD660861D1585070026FF70 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -151,8 +191,6 @@
 		FBE9DDD31D0D0CE20057623B /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		FBE9DDD91D0D20E00057623B /* LocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationService.h; sourceTree = "<group>"; };
 		FBE9DDDA1D0D20E00057623B /* LocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationService.m; sourceTree = "<group>"; };
-		FBE9DDDF1D0DBA3F0057623B /* BookHistorySearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookHistorySearchTableViewController.h; sourceTree = "<group>"; };
-		FBE9DDE01D0DBA3F0057623B /* BookHistorySearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookHistorySearchTableViewController.m; sourceTree = "<group>"; };
 		FBE9DDFE1D0EDF9C0057623B /* Reservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reservation.h; sourceTree = "<group>"; };
 		FBE9DDFF1D0EDF9C0057623B /* Reservation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reservation.m; sourceTree = "<group>"; };
 		FBE9DE141D0EE4920057623B /* TimeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLine.h; sourceTree = "<group>"; };
@@ -187,6 +225,17 @@
 				4AEF171B9F4336F1972CE758 /* Pods-QFirst.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		FB418F9E1D1AD64300FCB369 /* HZSigmentView */ = {
+			isa = PBXGroup;
+			children = (
+				FB418F9F1D1AD67500FCB369 /* HZSigmentScrollView.h */,
+				FB418FA01D1AD67500FCB369 /* HZSigmentScrollView.m */,
+				FB418FA11D1AD67500FCB369 /* HZSigmentView.h */,
+				FB418FA21D1AD67500FCB369 /* HZSigmentView.m */,
+			);
+			name = HZSigmentView;
 			sourceTree = "<group>";
 		};
 		FBD660811D157CB00026FF70 /* DBModels */ = {
@@ -235,12 +284,14 @@
 				FBE9DD7C1D0D097E0057623B /* Views */,
 				FBE9DD5B1D0D096C0057623B /* BookHistoryViewController.h */,
 				FBE9DD5C1D0D096C0057623B /* BookHistoryViewController.m */,
+				FB418FA51D1ADAD400FCB369 /* CurrentBookHistoryViewController.h */,
+				FB418FA61D1ADAD400FCB369 /* CurrentBookHistoryViewController.m */,
+				FB418FA81D1ADAEB00FCB369 /* ExpiredBookHistoryViewController.h */,
+				FB418FA91D1ADAEB00FCB369 /* ExpiredBookHistoryViewController.m */,
 				FBE9DD651D0D096C0057623B /* ClinicViewController.h */,
 				FBE9DD661D0D096C0057623B /* ClinicViewController.m */,
 				FBE9DD631D0D096C0057623B /* ClinicSearchResultTableViewController.h */,
 				FBE9DD641D0D096C0057623B /* ClinicSearchResultTableViewController.m */,
-				FBE9DDDF1D0DBA3F0057623B /* BookHistorySearchTableViewController.h */,
-				FBE9DDE01D0DBA3F0057623B /* BookHistorySearchTableViewController.m */,
 				FBD6609A1D15A9000026FF70 /* DoctorDetailViewController.h */,
 				FBD6609B1D15A9000026FF70 /* DoctorDetailViewController.m */,
 				FBE9DD5F1D0D096C0057623B /* BookmarkViewController.h */,
@@ -257,6 +308,14 @@
 				FBE9DD6E1D0D096C0057623B /* QRCodeViewController.m */,
 				FBE9DD6F1D0D096C0057623B /* TimelineViewController.h */,
 				FBE9DD701D0D096C0057623B /* TimelineViewController.m */,
+				FB38A1CB1D16C07F00BA6CCF /* EditMeInfoViewController.h */,
+				FB38A1CC1D16C07F00BA6CCF /* EditMeInfoViewController.m */,
+				FBA573931D1D39D3009132D4 /* QueueHistoryViewController.h */,
+				FBA573941D1D39D3009132D4 /* QueueHistoryViewController.m */,
+				FBA573961D1D8228009132D4 /* CurrentQueueViewController.h */,
+				FBA573971D1D8228009132D4 /* CurrentQueueViewController.m */,
+				FBA573991D1D8268009132D4 /* UsedQueueViewController.h */,
+				FBA5739A1D1D8268009132D4 /* UsedQueueViewController.m */,
 				FBE9DD441D0D08740057623B /* AppDelegate.h */,
 				FBE9DD451D0D08740057623B /* AppDelegate.m */,
 				FBE9DE171D0FDD9F0057623B /* SGLoc.gpx */,
@@ -280,6 +339,7 @@
 		FBE9DD7C1D0D097E0057623B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FB418F9E1D1AD64300FCB369 /* HZSigmentView */,
 				FBE9DDB61D0D0C4A0057623B /* FXBlurView */,
 				FBE9DDA91D0D0BFE0057623B /* QRView */,
 				FBE9DD991D0D0B640057623B /* TopAlertView */,
@@ -292,10 +352,17 @@
 				FBE9DDC11D0D0CB10057623B /* SignupView.h */,
 				FBE9DDC21D0D0CB10057623B /* SignupView.m */,
 				FBE9DDC31D0D0CB10057623B /* SignupView.xib */,
+				FBA5739C1D1E293A009132D4 /* ForgotPasswordView.h */,
+				FBA5739D1D1E293A009132D4 /* ForgotPasswordView.m */,
+				FBA5739F1D1E2952009132D4 /* ForgotPasswordView.xib */,
 				FBE9DDC41D0D0CB10057623B /* TimeCell.h */,
 				FBE9DDC51D0D0CB10057623B /* TimeCell.m */,
+				FB38A1C81D16BFF900BA6CCF /* InsetTextField.h */,
+				FB38A1C91D16BFF900BA6CCF /* InsetTextField.m */,
 				FBE9DDC61D0D0CB10057623B /* UILabel+DynamicSize.h */,
 				FBE9DDC71D0D0CB10057623B /* UILabel+DynamicSize.m */,
+				FB38A1CE1D16D14E00BA6CCF /* DataTapGestureRecognizer.h */,
+				FB38A1CF1D16D14E00BA6CCF /* DataTapGestureRecognizer.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -312,6 +379,10 @@
 				FB38A1C01D15B13200BA6CCF /* User.m */,
 				FB38A1C21D15B1FE00BA6CCF /* Image.h */,
 				FB38A1C31D15B1FE00BA6CCF /* Image.m */,
+				FBA5738D1D1C35A3009132D4 /* Queue.h */,
+				FBA5738E1D1C35A3009132D4 /* Queue.m */,
+				FBA573901D1C369E009132D4 /* Clinic.h */,
+				FBA573911D1C369E009132D4 /* Clinic.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -445,6 +516,7 @@
 				FBE9DDCD1D0D0CB10057623B /* SignupView.xib in Resources */,
 				FBE9DDC91D0D0CB10057623B /* DoctorCell.xib in Resources */,
 				FBE9DDCB1D0D0CB10057623B /* PasscodeView.xib in Resources */,
+				FBA573A01D1E2952009132D4 /* ForgotPasswordView.xib in Resources */,
 				FBE9DDA31D0D0BC70057623B /* FontAwesome.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,10 +583,15 @@
 				FBD660991D15A4F40026FF70 /* DBUser.m in Sources */,
 				FBD660941D15A4F40026FF70 /* DBClinic+CoreDataProperties.m in Sources */,
 				FBE9DDCA1D0D0CB10057623B /* PasscodeView.m in Sources */,
+				FB38A1D01D16D14E00BA6CCF /* DataTapGestureRecognizer.m in Sources */,
 				FBE9DDB41D0D0C320057623B /* QRUtil.m in Sources */,
 				FBD660981D15A4F40026FF70 /* DBUser+CoreDataProperties.m in Sources */,
+				FBA5739E1D1E293A009132D4 /* ForgotPasswordView.m in Sources */,
 				FB38A1C11D15B13200BA6CCF /* User.m in Sources */,
 				FBE9DDDB1D0D20E00057623B /* LocationService.m in Sources */,
+				FBA573951D1D39D3009132D4 /* QueueHistoryViewController.m in Sources */,
+				FBA573981D1D8228009132D4 /* CurrentQueueViewController.m in Sources */,
+				FB418FA71D1ADAD400FCB369 /* CurrentBookHistoryViewController.m in Sources */,
 				FBE9DD741D0D096C0057623B /* ClinicDetailViewController.m in Sources */,
 				FBE9DDCC1D0D0CB10057623B /* SignupView.m in Sources */,
 				FBD660971D15A4F40026FF70 /* DBImage.m in Sources */,
@@ -522,30 +599,37 @@
 				FBE9DDCF1D0D0CB10057623B /* UILabel+DynamicSize.m in Sources */,
 				FBE9DDD51D0D0CE20057623B /* Utils.m in Sources */,
 				FBE9DD461D0D08740057623B /* AppDelegate.m in Sources */,
+				FBA5739B1D1D8268009132D4 /* UsedQueueViewController.m in Sources */,
 				FBE9DD711D0D096C0057623B /* BookHistoryViewController.m in Sources */,
+				FB38A1CD1D16C07F00BA6CCF /* EditMeInfoViewController.m in Sources */,
 				FBE9DD7A1D0D096C0057623B /* QRCodeViewController.m in Sources */,
+				FB418FA31D1AD67500FCB369 /* HZSigmentScrollView.m in Sources */,
 				FBE9DDB21D0D0C320057623B /* QRItem.m in Sources */,
 				FBE9DDB91D0D0C620057623B /* FXBlurView.m in Sources */,
 				FBE9DE161D0EE4920057623B /* TimeLine.m in Sources */,
 				FBE9DD431D0D08740057623B /* main.m in Sources */,
 				FBD660801D157BCE0026FF70 /* qfirst.xcdatamodeld in Sources */,
+				FBA573921D1C369E009132D4 /* Clinic.m in Sources */,
 				FBE9DDA21D0D0BC70057623B /* FAImageView.m in Sources */,
 				FBD660961D15A4F40026FF70 /* DBImage+CoreDataProperties.m in Sources */,
+				FB418FA41D1AD67500FCB369 /* HZSigmentView.m in Sources */,
 				FBE9DDC81D0D0CB10057623B /* DoctorCell.m in Sources */,
 				FBE9DDCE1D0D0CB10057623B /* TimeCell.m in Sources */,
 				FBD660951D15A4F40026FF70 /* DBClinic.m in Sources */,
 				FBE9DD781D0D096C0057623B /* LoginViewController.m in Sources */,
+				FB38A1CA1D16BFF900BA6CCF /* InsetTextField.m in Sources */,
 				FBE9DE0D1D0EDF9C0057623B /* Reservation.m in Sources */,
 				FBE9DD791D0D096C0057623B /* MeViewController.m in Sources */,
 				FBE9DD751D0D096C0057623B /* ClinicSearchResultTableViewController.m in Sources */,
 				FBE9DDA51D0D0BC70057623B /* UIFont+FontAwesome.m in Sources */,
-				FBE9DDE11D0DBA3F0057623B /* BookHistorySearchTableViewController.m in Sources */,
 				FBE9DD761D0D096C0057623B /* ClinicViewController.m in Sources */,
 				FBE9DDB31D0D0C320057623B /* QRMenu.m in Sources */,
 				FBE9DDA41D0D0BC70057623B /* NSString+FontAwesome.m in Sources */,
 				FBE9DD731D0D096C0057623B /* BookmarkViewController.m in Sources */,
+				FBA5738F1D1C35A3009132D4 /* Queue.m in Sources */,
 				FBE9DD7B1D0D096C0057623B /* TimelineViewController.m in Sources */,
 				FBD660871D1585070026FF70 /* Reachability.m in Sources */,
+				FB418FAA1D1ADAEB00FCB369 /* ExpiredBookHistoryViewController.m in Sources */,
 				FBE9DDB51D0D0C320057623B /* QRView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

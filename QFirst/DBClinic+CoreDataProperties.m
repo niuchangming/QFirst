@@ -22,7 +22,7 @@
 @dynamic latitude;
 @dynamic longitude;
 @dynamic name;
-@dynamic image;
+@dynamic images;
 @dynamic users;
 
 @end

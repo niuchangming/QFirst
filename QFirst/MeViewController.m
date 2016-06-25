@@ -16,6 +16,8 @@
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "DBImage.h"
+#import "DataTapGestureRecognizer.h"
+#import "QueueHistoryViewController.h"
 
 @interface MeViewController (){
     UILabel *mobileLbl;
@@ -55,6 +57,11 @@
     
     [self setupViews];
     [self getUserInfo];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refresh:)
+                                                 name:NOTIFY_USER_INFO_UPDATE
+                                               object:nil];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -68,19 +75,40 @@
     userAvatarIv.layer.borderColor = [UIColor whiteColor].CGColor;
     [userAvatarIv setUserInteractionEnabled:YES];
     
+    [nameLbl sizeToFit];
+    nameLbl.center = CGPointMake(self.view.frame.size.width / 2, nameLbl.center.y);
+    [nameLbl setUserInteractionEnabled:YES];
+    DataTapGestureRecognizer *editNameTap = [[DataTapGestureRecognizer alloc] initWithTarget:self action:@selector(rowClicked:)];
+    editNameTap.data = @"name";
+    editNameTap.numberOfTapsRequired = 1;
+    [nameLbl addGestureRecognizer:editNameTap];
+    
+    
     [userAvatarIv setImage:[UIImage imageNamed:@"default_avatar.jpg"]];
     [bgImageView setImage:[UIImage imageNamed:@"default_avatar.jpg"]];
     
     CGRect mobileFrame = CGRectMake(0, blurBgView.frame.origin.y + blurBgView.frame.size.height + 8, self.view.frame.size.width, 40);
     UIView *mobileView = [self getRowViewWithKey:@"Mobile" AndValue:@"" AndFrame: mobileFrame];
+    DataTapGestureRecognizer *editMobileTap = [[DataTapGestureRecognizer alloc] initWithTarget:self action:@selector(rowClicked:)];
+    editMobileTap.data = @"mobile";
+    editMobileTap.numberOfTapsRequired = 1;
+    [mobileView addGestureRecognizer:editMobileTap];
     mobileLbl = (UILabel *) [mobileView viewWithTag:1];
     
     CGRect emailFrame = CGRectMake(0, mobileFrame.origin.y + mobileFrame.size.height + 8, self.view.frame.size.width, 40);
     UIView *emailView = [self getRowViewWithKey:@"Email" AndValue:@"" AndFrame:emailFrame];
+    DataTapGestureRecognizer *editEmailTap = [[DataTapGestureRecognizer alloc] initWithTarget:self action:@selector(rowClicked:)];
+    editEmailTap.data = @"email";
+    editEmailTap.numberOfTapsRequired = 1;
+    [emailView addGestureRecognizer:editEmailTap];
     emailLbl = (UILabel*)[emailView viewWithTag:1];
     
     CGRect icFrame = CGRectMake(0, emailFrame.origin.y + emailFrame.size.height + 8, self.view.frame.size.width, 40);
     UIView *icView = [self getRowViewWithKey:@"IC" AndValue:@"" AndFrame:icFrame];
+    DataTapGestureRecognizer *editIcTap = [[DataTapGestureRecognizer alloc] initWithTarget:self action:@selector(rowClicked:)];
+    editIcTap.data = @"ic";
+    editIcTap.numberOfTapsRequired = 1;
+    [icView addGestureRecognizer:editIcTap];
     icLbl = (UILabel*)[icView viewWithTag:1];
     
     CGRect bookFrame = CGRectMake(0, icFrame.origin.y + icFrame.size.height + 8, self.view.frame.size.width, 40);
@@ -92,6 +120,9 @@
     
     CGRect queueFrame = CGRectMake(0, bookFrame.origin.y + bookFrame.size.height + 8, self.view.frame.size.width, 40);
     UIView *queueView = [self getRowViewWithKey:@"Queue History" AndValue:@"" AndFrame:queueFrame];
+    UITapGestureRecognizer *queueTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(queueRowClicked)];
+    queueTap.numberOfTapsRequired = 1;
+    [queueView addGestureRecognizer:queueTap];
     queueLbl = (UILabel*)[queueView viewWithTag:1];
     
     signBtn.frame = CGRectMake(0, queueFrame.origin.y + queueFrame.size.height + 8, self.view.frame.size.width, 40);
@@ -183,8 +214,10 @@
     [bgImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatarThumbnail?id=%d", baseUrl, [user.image entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     [userAvatarIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatarThumbnail?id=%d", baseUrl, [user.image entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     
-    NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
-    nameLbl.attributedText = [[NSAttributedString alloc] initWithString:user.name attributes:underlineAttribute];
+    if(![Utils IsEmpty:user.name]){
+        NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+        nameLbl.attributedText = [[NSAttributedString alloc] initWithString:user.name attributes:underlineAttribute];
+    }
     
     if([user.role isEqualToString:@"NORMAL"]){
         [roleIv setImage:[UIImage imageNamed:@"user"]];
@@ -228,6 +261,13 @@
     }else{
         [queueLbl setHidden:YES];
     }
+    
+    if(user.queues.count > 0){
+        queueLbl.text = [NSString stringWithFormat:@"%lu", user.queues.count];
+        [queueLbl setHidden:NO];
+    }else{
+        [queueLbl setHidden:YES];
+    }
 }
 
 -(void) bookRowClicked{
@@ -236,6 +276,22 @@
         return;
     }
     [self performSegueWithIdentifier:@"segue_book_me" sender:self];
+}
+
+-(void) queueRowClicked {
+    if ([Utils IsEmpty:[Utils accessToken]]) {
+        [self login];
+        return;
+    }
+    [self performSegueWithIdentifier:@"segue_queue_me" sender:self];
+}
+
+-(void) rowClicked:(id) sender{
+    if ([Utils IsEmpty:[Utils accessToken]]) {
+        [self login];
+        return;
+    }
+    [self performSegueWithIdentifier:@"segue_edit_me" sender:sender];
 }
 
 -(void) login{
@@ -296,6 +352,14 @@
     if ([[segue identifier] isEqualToString:@"segue_login_me"]){
         LoginViewController *vc = [segue destinationViewController];
         vc.delegate = self;
+    }else if([[segue identifier] isEqualToString:@"segue_edit_me"]){
+        EditMeInfoViewController *editMeInfoVC = [segue destinationViewController];
+        editMeInfoVC.delegate = self;
+        DataTapGestureRecognizer *gestureRecognizer = (DataTapGestureRecognizer *) sender;
+        editMeInfoVC.type = gestureRecognizer.data;
+    }else if([[segue identifier] isEqualToString:@"segue_queue_me"]){
+        QueueHistoryViewController *queueHistoryVC = [segue destinationViewController];
+        queueHistoryVC.queues = user.queues;
     }
 }
 
@@ -303,8 +367,27 @@
     if([Utils IsEmpty:err]){
         [self resetSignBtn];
         [self getUserInfo];
-        
     }
+}
+
+-(void) updateCompletedWithResponseData:(NSString *)data withType:(NSString *)type{
+    if([type isEqualToString:@"email"]){
+        emailLbl.text = data;
+    }else if([type isEqualToString:@"ic"]){
+        icLbl.text = data;
+    }else if([type isEqualToString:@"name"]){
+        if(![Utils IsEmpty:data]){
+            NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+            nameLbl.attributedText = [[NSAttributedString alloc] initWithString:data attributes:underlineAttribute];
+        }
+    }
+    
+    [MozTopAlertView showWithType:MozAlertTypeSuccess text:@"Updated successful." doText:nil doBlock:nil parentView:self.view];
+}
+
+
+-(void) refresh:(id)sender{
+    [self getUserInfo];
 }
 
 

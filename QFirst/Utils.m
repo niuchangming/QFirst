@@ -39,6 +39,13 @@
     return screenRect;
 }
 
++ (NSString*) removeWhiteSpace:(NSString *)str{
+    if([Utils IsEmpty:str]){
+        return @"";
+    }
+    return [str stringByReplacingOccurrencesOfString:@" " withString:@""];
+}
+
 + (BOOL) IsEmpty:(id)thing {
     return thing == nil
     || ([thing respondsToSelector:@selector(length)]
@@ -68,6 +75,12 @@
     return [phoneTest evaluateWithObject:mobileNumber];
 }
 
++ (BOOL)isSingaporeContactNo:(NSString *)contactNumber{
+    NSString *phoneRegex = @"^(((0|((\\+)?65([- ])?))|((\\((\\+)?65\\)([- ])?)))?[6-9]\\d{7})?$";
+    NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+    return [phoneTest evaluateWithObject:contactNumber];
+}
+
 + (NSString*) accessToken{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString * accessToken = [defaults objectForKey:@"access_token"];
@@ -76,8 +89,26 @@
 
 + (NSString*) mobile{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString * mobile = [defaults objectForKey:@"mobile"];
+    NSString * mobile = [Utils IsEmpty:[defaults objectForKey:@"mobile"]] ? @"" : [defaults objectForKey:@"mobile"];
     return mobile;
+}
+
++ (NSString*) ic{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString * ic = [Utils IsEmpty:[defaults objectForKey:@"ic"]] ? @"" : [defaults objectForKey:@"ic"];
+    return ic;
+}
+
++ (NSString*) email{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString * email = [Utils IsEmpty:[defaults objectForKey:@"email"]] ? @"" : [defaults objectForKey:@"email"];
+    return email;
+}
+
++ (NSString*) name{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString * name = [Utils IsEmpty:[defaults objectForKey:@"name"]] ? @"" : [defaults objectForKey:@"name"];
+    return name;
 }
 
 + (NSString *) getDateStringByDate: (NSDate*) date{

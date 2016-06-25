@@ -23,7 +23,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSString *role;
 @property (nullable, nonatomic, retain) DBClinic *clinic;
-@property (nullable, nonatomic, retain) DBImage *image;
+@property (nullable, nonatomic, retain) NSSet<DBImage *> *images;
+
+@end
+
+@interface DBUser (CoreDataGeneratedAccessors)
+
+- (void)addImagesObject:(DBImage *)value;
+- (void)removeImagesObject:(DBImage *)value;
+- (void)addImages:(NSSet<DBImage *> *)values;
+- (void)removeImages:(NSSet<DBImage *> *)values;
 
 @end
 

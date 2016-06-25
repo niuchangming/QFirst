@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *bookmarkBtn;
 @property (strong, nonatomic) DBClinic *clinic;
 @property (strong, nonatomic) NSArray<DBUser *> *doctorArray;
+@property (strong, nonatomic) UIActivityIndicatorView *loadingBar;
 
 - (IBAction)expandArrowBtnClicked:(id)sender;
 - (IBAction)quickBtnClicked:(id)sender;

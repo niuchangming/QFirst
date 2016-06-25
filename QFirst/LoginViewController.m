@@ -9,10 +9,9 @@
 #import "LoginViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "MozTopAlertView.h"
-#import "PasscodeView.h"
 #import "Utils.h"
 #import "ConstantValues.h"
-#import "DBUser.h"
+#import "User.h"
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 
 @interface LoginViewController ()
@@ -30,6 +29,7 @@
 @synthesize delegate;
 @synthesize loadingBar;
 @synthesize cancelBtn;
+@synthesize forgotPwdPopView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -126,28 +126,29 @@
         if(![Utils IsEmpty:errMsg]) {
             [MozTopAlertView showWithType:MozAlertTypeError text:errMsg doText:nil doBlock:nil parentView:self.view];
         }else{
-            DBUser *user = [[DBUser alloc] initWithJson:obj];
+            User *user = [[User alloc] initWithJson:obj];
             [self storeUserInfo:user];
             [delegate loginComplete:nil];
-            [self cancelBtnClicked:nil];
         }
     }else{
         [MozTopAlertView showWithType:MozAlertTypeError text:@"Unknown error." doText:nil doBlock:nil parentView:self.view];
     }
 }
 
--(void) storeUserInfo: (DBUser *) user{
+-(void) storeUserInfo: (User *) user{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:user.accessToken forKey:@"access_token"];
     [defaults setObject:user.mobile forKey:@"mobile"];
     [defaults setBool:user.isActive forKey:@"is_active"];
-    [defaults setInteger:[user.entityId intValue] forKey:@"entity_id"];
+    [defaults setObject:user.name forKey:@"name"];
+    [defaults setObject:user.ic forKey:@"ic"];
+    [defaults setObject:user.email forKey:@"email"];
+    [defaults setInteger:user.entityId forKey:@"entity_id"];
     [defaults setObject:user.role forKey:@"role"];
     [defaults synchronize];
 }
 
 -(void) verifyCompletedWithResponseData:(id)resp withError:(NSString *)err{
-    
     if(![Utils IsEmpty:err]){
         [delegate loginComplete:err];
     }else{
@@ -155,6 +156,7 @@
     }
     
     [verifyPopView dismissWithCompletion:nil];
+    [self cancelBtnClicked:nil];
 }
 
 - (IBAction)submitBtnClicked:(id)sender {
@@ -188,6 +190,7 @@
                 [MozTopAlertView showWithType:MozAlertTypeError text:errMsg doText:nil doBlock:nil parentView:self.view];
             }else{
                 [self parseUser:responseObject];
+                [self cancelBtnClicked:nil];
             }
         }else{
             [MozTopAlertView showWithType:MozAlertTypeError text:@"Unknown error" doText:nil doBlock:nil parentView:self.view];
@@ -203,10 +206,31 @@
     }];
 }
 
+-(void) popupForgotPwdDialog{
+    if(forgotPwdPopView == nil){
+        ForgotPasswordView *forgotView = [[ForgotPasswordView alloc] initWithFrame:CGRectMake(0, 0, 300, 200)];
+        forgotView.delegate = self;
+        forgotPwdPopView = [[JCAlertView alloc] initWithCustomView:forgotView dismissWhenTouchedBackground:NO];
+    }
+    
+    [forgotPwdPopView show];
+}
+
+-(void) askPwdCompletedWithResponseData:(id)resp withError:(NSString *)err{
+    if(![Utils IsEmpty:err]){
+        [MozTopAlertView showWithType:MozAlertTypeError text:err doText:nil doBlock:nil parentView:self.view];
+    }else{
+        [MozTopAlertView showWithType:MozAlertTypeSuccess text:@"New password sent." doText:nil doBlock:nil parentView:self.view];
+    }
+    [forgotPwdPopView dismissWithCompletion:nil];
+}
+
 - (IBAction)signupBtnClicked:(id)sender {
     [self popupSignupDialog];
 }
+
 - (IBAction)forgetPwdBtnClicked:(id)sender {
+    [self popupForgotPwdDialog];
 }
 
 - (IBAction)cancelBtnClicked:(id)sender {

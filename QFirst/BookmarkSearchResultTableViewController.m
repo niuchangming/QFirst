@@ -9,6 +9,7 @@
 #import "BookmarkSearchResultTableViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ConstantValues.h"
+#import "DBImage.h"
 #import "DBClinic.h"
 #import "ClinicDetailViewController.h"
 
@@ -42,7 +43,11 @@
     }
     
     UIImageView *clinicLogoIv = (UIImageView *)[cell viewWithTag:1];
-    [clinicLogoIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ClinicController/showClinicThumbnailLogo?id=%@", baseUrl, [[self.clinicResults objectAtIndex:indexPath.row] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    if([[[self.clinicResults objectAtIndex:indexPath.row] images] count] > 0){
+        [clinicLogoIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ClinicController/showClinicThumbnailLogo?id=%@", baseUrl, [[[[[self.clinicResults objectAtIndex:indexPath.row] images] allObjects] objectAtIndex:0] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    }else{
+        [clinicLogoIv setImage:[UIImage imageNamed:@"default_avatar"]];
+    }
     
     clinicLogoIv.layer.cornerRadius = clinicLogoIv.frame.size.width / 2;
     clinicLogoIv.clipsToBounds = YES;

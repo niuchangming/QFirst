@@ -21,6 +21,6 @@
 @dynamic name;
 @dynamic role;
 @dynamic clinic;
-@dynamic image;
+@dynamic images;
 
 @end

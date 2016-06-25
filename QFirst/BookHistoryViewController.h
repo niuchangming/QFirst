@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BookHistoryViewController : UITableViewController<UISearchResultsUpdating, UISearchBarDelegate>
+@interface BookHistoryViewController : UIViewController
 
-@property (nonatomic, strong) UISearchController *searchController;
 @property (nonatomic, strong) NSMutableArray *reservations;
-@property (strong, nonatomic) NSMutableArray *searchResults;
 
 @end

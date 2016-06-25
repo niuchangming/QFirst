@@ -10,6 +10,7 @@
 #import <JCAlertView/JCAlertView.h>
 #import "SignupView.h"
 #import "PasscodeView.h"
+#import "ForgotPasswordView.h"
 
 @protocol LoginViewControllerDelegate <NSObject>
 
@@ -18,7 +19,7 @@
 
 @end
 
-@interface LoginViewController : UIViewController<SignupViewDelegate, PasscodeViewDelegate>
+@interface LoginViewController : UIViewController<SignupViewDelegate, PasscodeViewDelegate, ForgotPwsViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *mobileNoTf;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTf;
@@ -27,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
 @property (strong, nonatomic) JCAlertView *signupPopView;
 @property (strong, nonatomic) JCAlertView *verifyPopView;
+@property (strong, nonatomic) JCAlertView *forgotPwdPopView;
 @property (weak, nonatomic) id<LoginViewControllerDelegate> delegate;
 - (IBAction)submitBtnClicked:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *signupBtn;

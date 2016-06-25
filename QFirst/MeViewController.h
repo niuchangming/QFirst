@@ -10,8 +10,9 @@
 #import "FXBlurView.h"
 #import "User.h"
 #import "LoginViewController.h"
+#import "EditMeInfoViewController.h"
 
-@interface MeViewController : UIViewController<LoginViewControllerDelegate>
+@interface MeViewController : UIViewController<LoginViewControllerDelegate, EditMeInfoDelegate>
 
 @property (strong, nonatomic) UIButton *signBtn;
 @property (weak, nonatomic) IBOutlet UIView *container;
@@ -23,5 +24,6 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (strong, nonatomic) User *user;
+
 
 @end

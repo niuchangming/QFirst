@@ -17,17 +17,27 @@
 
 + (CGRect)screenBounds;
 
++ (NSString*) removeWhiteSpace:(NSString *)str;
+
 + (BOOL) IsEmpty:(id)thing;
 
 + (NSString*) accessToken;
 
 + (NSString*) mobile;
 
++ (NSString*) ic;
+
++ (NSString*) email;
+
++ (NSString*) name;
+
 + (BOOL)isValidEmail:(NSString *) emailStr;
 
 + (BOOL)isNumber:(NSString *)string;
 
 + (BOOL)isSingaporeMobileNo:(NSString *)mobileNumber;
+
++ (BOOL)isSingaporeContactNo:(NSString *)contactNumber;
 
 +(bool) isSingaporeIC:(NSString *)ic;
 

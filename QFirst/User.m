@@ -8,6 +8,7 @@
 
 #import "User.h"
 #import "Utils.h"
+#import "Queue.h"
 
 @implementation User
 
@@ -15,10 +16,10 @@
     self = [super init];
     
     if(self){
-        self.entityId = [NSNumber numberWithInt:[[dic valueForKey:@"entityId"] intValue]];
+        self.entityId = [[dic valueForKey:@"entityId"] intValue];
         self.name = [dic valueForKey:@"name"];
         self.email = [dic valueForKey:@"email"];
-        self.mobile = [dic valueForKey:@"mobile"];
+        self.mobile = [[dic valueForKey:@"mobile"] stringByReplacingOccurrencesOfString:@"+65" withString:@""];
         self.ic = [dic valueForKey:@"ic"];
         self.accessToken = [dic valueForKey:@"accessToken"];
         self.role = [dic valueForKey:@"role"];
@@ -42,6 +43,14 @@
             self.doctorReservations = [[NSMutableArray alloc] init];
             for(NSDictionary *doctorDic in doctorArray) {
                 [self.doctorReservations addObject:[[User alloc] initWithJson:doctorDic]];
+            }
+        }
+        
+        NSArray *queueArray = [dic valueForKey:@"queues"];
+        if(![Utils IsEmpty:queueArray] && queueArray.count > 0){
+            self.queues = [[NSMutableArray alloc] init];
+            for(NSDictionary *queueDic in queueArray) {
+                [self.queues addObject:[[Queue alloc] initWithJson:queueDic]];
             }
         }
     }

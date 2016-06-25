@@ -9,7 +9,6 @@
 #import "DoctorDetailViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "Utils.h"
-#
 #import "MozTopAlertView.h"
 #import "ConstantValues.h"
 #import "Reservation.h"
@@ -46,6 +45,14 @@
     self.submitBtn.clipsToBounds = YES;
     self.submitBtn.layer.masksToBounds = YES;
     
+    UILabel *phonePrefixLbl = [[UILabel alloc] initWithFrame:CGRectMake(24, 4, 32, 16)];
+    [phonePrefixLbl setTextColor:[Utils colorFromHexString:@"#4A4A4A"]];
+    [phonePrefixLbl setText:@"+65"];
+    [phonePrefixLbl setFont:[UIFont systemFontOfSize:16]];
+    
+    self.phoneTf.leftViewMode = UITextFieldViewModeAlways;
+    self.phoneTf.leftView = phonePrefixLbl;
+    
     [self subscribeKeyboardNotifications];
     
     if(self.isQuickMode){
@@ -54,11 +61,22 @@
         [self loadClinicReservations];
         [self getDefaultDayInterval];
     }else{
+        self.navigationItem.rightBarButtonItem = nil;
         self.nameLbl.text = [self.doctor name];
         self.timeLbl.text = [Utils getReadableDateString:[NSDate dateWithTimeIntervalSince1970:self.datetime]];
         self.clinicInfoLbl.text = self.doctor.clinic.name;
-        [self.avatarIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ClinicController/showClinicThumbnailLogo?id=%@", baseUrl, [[self.doctor image] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+        
+        if([[self.doctor images] count] > 0){
+            [self.avatarIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatarThumbnail?id=%@", baseUrl, [[[[self.doctor images] allObjects] objectAtIndex:0] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+        }else{
+            [self.avatarIv setImage:[UIImage imageNamed:@"default_avatar"]];
+        }
     }
+    
+    self.nameTf.text = [Utils name];
+    self.phoneTf.text = [Utils mobile];
+    self.iCard.text = [Utils ic];
+    self.emailTf.text = [Utils email];
 }
 
 -(void) viewDidLayoutSubviews{
@@ -179,7 +197,7 @@
             doctorIndex++;
         }
     }else{
-        if([doctors objectAtIndex:doctorIndex] == reservation.doctor.entityId){
+        if([[(DBUser*)[doctors objectAtIndex:doctorIndex] entityId] intValue] == reservation.doctor.entityId){
             if(doctorIndex == doctors.count - 1){
                 doctorIndex = 0;
                 next++;
@@ -200,10 +218,18 @@
 }
 
 -(void) updateAvailableReservation: (DBUser*) doctor with:(NSTimeInterval) timeInterval{
+    self.doctor = doctor;
+    self.datetime = timeInterval;
+    
     self.nameLbl.text = [self.doctor name];
     self.timeLbl.text = [Utils getReadableDateString:[NSDate dateWithTimeIntervalSince1970:timeInterval]];
-    self.clinicInfoLbl.text = doctor.clinic.name;
-    [self.avatarIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ClinicController/showClinicThumbnailLogo?id=%@", baseUrl, [[self.doctor image] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    self.clinicInfoLbl.text = self.doctor.clinic.name;
+    
+    if([[self.doctor images] count] > 0){
+        [self.avatarIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatarThumbnail?id=%@", baseUrl, [[[[self.doctor images] allObjects] objectAtIndex:0] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    }else{
+        [self.avatarIv setImage:[UIImage imageNamed:@"default_avatar"]];
+    }
 }
 
 - (IBAction)submitBtnClicked:(id)sender {
@@ -258,6 +284,7 @@
                 [MozTopAlertView showWithType:MozAlertTypeError text:errMsg doText:nil doBlock:nil parentView:self.view];
             }else{
                 if([self.delegate respondsToSelector:@selector(reserveCompletedWithResponseData:withError:)]){
+                    [self postUserInfoUpdateNotification];
                     [self.delegate reserveCompletedWithResponseData:responseObject withError:errMsg];
                     [self.navigationController popViewControllerAnimated:YES];
                 }
@@ -272,6 +299,10 @@
         [self.loadingBar stopAnimating];
         [self.submitBtn setEnabled:true];
     }];
+}
+
+-(void) postUserInfoUpdateNotification{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFY_USER_INFO_UPDATE object:nil userInfo:nil];
 }
 
 -(void) login{

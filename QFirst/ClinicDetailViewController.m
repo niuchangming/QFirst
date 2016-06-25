@@ -19,6 +19,8 @@
 #import "AppDelegate.h"
 #import "TimelineViewController.h"
 #import "DoctorDetailViewController.h"
+#import <AFNetworking/AFHTTPRequestOperationManager.h>
+#import "Queue.h"
 
 @interface ClinicDetailViewController (){
     NSLayoutConstraint *topContraint;
@@ -45,6 +47,7 @@
 @synthesize clinic;
 @synthesize bookmarkBtn;
 @synthesize doctorArray;
+@synthesize loadingBar;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,6 +55,10 @@
     doctorArray = [clinic.users allObjects];
     
     isFirstLoad = true;
+    
+    if(!clinic.isCoop.boolValue){
+        self.navigationItem.rightBarButtonItem = nil;
+    }
     
     descLbl.text = clinic.desc;
     clinicName.text = clinic.name;
@@ -61,7 +68,11 @@
     clinicLogo.layer.cornerRadius = self.clinicLogo.frame.size.width / 2;
     clinicLogo.clipsToBounds = YES;
     clinicLogo.layer.masksToBounds = YES;
-    [clinicLogo sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ClinicController/showClinicThumbnailLogo?id=%@", baseUrl, [[clinic image] entityId]]]];
+    if([[clinic images] count] > 0){
+        [clinicLogo sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ClinicController/showClinicThumbnailLogo?id=%@", baseUrl, [[[[clinic images] allObjects] objectAtIndex:0] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    }else{
+        [clinicLogo setImage:[UIImage imageNamed:@"default_avatar"]];
+    }
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
@@ -136,7 +147,6 @@
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     [self.locationManager startUpdatingLocation];
     
-    
     UIView *view = [[UIView alloc]initWithFrame:CGRectZero];
     [clinicMapView addSubview:view];
 }
@@ -156,7 +166,11 @@
                 avatarIV.clipsToBounds = YES;
                 avatarIV.contentMode = UIViewContentModeScaleAspectFill;
                 avatarIV.layer.masksToBounds = YES;
-                [avatarIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatarThumbnail?id=%@", baseUrl, [[[doctorArray objectAtIndex:i] image] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+                if([[[doctorArray objectAtIndex:i] images] count] > 0){
+                    [avatarIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@UserController/showUserAvatarThumbnail?id=%@", baseUrl, [[[[[doctorArray objectAtIndex:i] images] allObjects] objectAtIndex:0] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+                }else{
+                    [avatarIV setImage:[UIImage imageNamed:@"default_avatar"]];
+                }
                 [doctorCell addSubview:avatarIV];
                 
                 UILabel *nameLbl = [[UILabel alloc]initWithFrame:CGRectMake(64, 25, self.view.frame.size.width - 152, 22)];
@@ -224,7 +238,7 @@
     queueBtn = [[UIButton alloc] initWithFrame:CGRectMake(8, bottomSpiltor.frame.origin.y + bottomSpiltor.frame.size.height + 8, self.view.frame.size.width - 16, 40)];
     
     if([type isEqualToString:@"call"]){
-        [queueBtn setTitle:@"Call (67398273)" forState:UIControlStateNormal];
+        [queueBtn setTitle:[NSString stringWithFormat:@"Call (%@)", [Utils removeWhiteSpace:clinic.contact]]forState:UIControlStateNormal];
         [queueBtn addTarget:self action:@selector(call:) forControlEvents:UIControlEventTouchUpInside];
         [queueBtn setBackgroundColor:[Utils colorFromHexString:@"#007AFF"]];
     }else{
@@ -243,6 +257,11 @@
     [self.doctorContainer addSubview:queueBtn];
     
     doctorContainerHeight += queueBtn.frame.size.height + bottomSpiltor.frame.size.height;
+    
+    loadingBar = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    loadingBar.frame = CGRectMake(queueBtn.frame.size.width - 28, 10, 20, 20);
+    [queueBtn addSubview:loadingBar];
+    [loadingBar hidesWhenStopped];
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{}
@@ -317,9 +336,39 @@
         return;
     }
     
-    if(descLbl.alpha == 1){
-        [self toggleView:descLbl];
-    }
+    [loadingBar startAnimating];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:[Utils accessToken] forKey: @"accessToken"];
+    [params setObject:clinic.entityId forKey: @"clinicId"];
+    [params setObject:[NSNumber numberWithBool:YES] forKey: @"isApp"];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:[NSString stringWithFormat:@"%@ClinicController/takeQueue", baseUrl] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]] == YES){
+            NSDictionary *obj = (NSDictionary *)responseObject;
+            NSString *errMsg = [obj valueForKey:@"error"];
+            if(![Utils IsEmpty:errMsg]){
+                [MozTopAlertView showWithType:MozAlertTypeError text:errMsg doText:nil doBlock:nil parentView:self.view];
+            }else{
+                Queue *queue = [[Queue alloc] initWithJson:obj];
+                if(queue != nil){
+                    [MozTopAlertView showWithType:MozAlertTypeSuccess text:[NSString stringWithFormat:@"You queue number is: A%i", queue.number] doText:nil doBlock:nil parentView:self.view];
+                    
+                    [self postUserInfoUpdateNotification];
+                }
+            }
+        }else{
+            [MozTopAlertView showWithType:MozAlertTypeError text:@"Unknown error." doText:nil doBlock:nil parentView:self.view];
+        }
+        [loadingBar stopAnimating];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MozTopAlertView showWithType:MozAlertTypeError text:[error localizedDescription] doText:nil doBlock:nil parentView:self.view];
+        [loadingBar stopAnimating];
+    }];
+}
+
+-(void) postUserInfoUpdateNotification{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFY_USER_INFO_UPDATE object:nil userInfo:nil];
 }
 
 -(void) login{
@@ -327,8 +376,13 @@
 }
 
 -(void) call:(id)sender{
-    NSString *phoneNumber = [@"telprompt://" stringByAppendingString:[clinic contact]];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
+    NSString *contactNo = [Utils removeWhiteSpace:clinic.contact];
+    if([Utils isSingaporeContactNo:contactNo]){
+        NSString *phoneNumber = [@"telprompt://" stringByAppendingString:contactNo];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
+    }else{
+        [MozTopAlertView showWithType:MozAlertTypeError text:@"Phone number cannot be called." doText:nil doBlock:nil parentView:self.view];
+    }
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

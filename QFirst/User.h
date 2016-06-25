@@ -12,7 +12,7 @@
 @interface User : NSObject
 
 @property (nonatomic, strong) NSString *email;
-@property (nonatomic, strong) NSNumber *entityId;
+@property int entityId;
 @property (nonatomic, strong) NSString *accessToken;
 @property (nonatomic, strong) NSString *ic;
 @property (nonatomic, strong) NSNumber *isActive;
@@ -22,6 +22,7 @@
 @property (nonatomic, strong) Image *image;
 @property (nonatomic, strong) NSMutableArray *patientReservations;
 @property (nonatomic, strong) NSMutableArray *doctorReservations;
+@property (nonatomic, strong) NSMutableArray *queues;
 
 -(id) initWithJson:(NSDictionary*) dic;
 

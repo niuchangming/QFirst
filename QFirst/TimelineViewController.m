@@ -103,6 +103,8 @@
 - (void)calendar:(JTCalendarManager *)calendar prepareDayView:(JTCalendarDayView *)dayView{
     if([calendarManager.dateHelper date:dayView.date isEqualOrBefore:[calendarManager.dateHelper addToDate:[NSDate date] days:-1]]){
         dayView.hidden = YES;
+    }else{
+        dayView.hidden = NO;
     }
     
     // Today
@@ -119,13 +121,6 @@
         dayView.dotView.backgroundColor = [UIColor whiteColor];
         dayView.textLabel.textColor = [UIColor whiteColor];
     }
-    // Other month
-    else if(![calendarManager.dateHelper date:calendarView.date isTheSameMonthThan:dayView.date]){
-        dayView.circleView.hidden = YES;
-        dayView.dotView.backgroundColor = [UIColor redColor];
-        dayView.textLabel.textColor = [UIColor lightGrayColor];
-    }
-    // Another day of the current month
     else{
         dayView.circleView.hidden = YES;
         dayView.dotView.backgroundColor = [UIColor redColor];
@@ -148,17 +143,6 @@
                         dayView.circleView.transform = CGAffineTransformIdentity;
                         [calendarManager reload];
                     } completion:nil];
-    
-    
-    // Load the previous or next page if touch a day from another month
-    
-    if(![calendarManager.dateHelper date:calendarView.date isTheSameMonthThan:dayView.date]){
-        if([calendarView.date compare:dayView.date] == NSOrderedAscending){
-            [calendarView loadNextPageWithAnimation];
-        }else{
-            [calendarView loadPreviousPageWithAnimation];
-        }
-    }
 }
 
 - (UIView<JTCalendarDay> *)calendarBuildDayView:(JTCalendarManager *)calendar{

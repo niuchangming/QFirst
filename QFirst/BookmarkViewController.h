@@ -11,8 +11,9 @@
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import "DBClinic.h"
 
-@interface BookmarkViewController : UITableViewController<DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, UISearchResultsUpdating, UISearchBarDelegate>
+@interface BookmarkViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, UISearchResultsUpdating, UISearchBarDelegate>
 
+@property (weak, nonatomic) IBOutlet UITableView *bookmarkClinicTB;
 @property (nonatomic, strong) UISearchController *searchController;
 @property (nonatomic, strong) NSMutableArray<DBClinic *> *bookmarkClinics;
 @property (strong, nonatomic) NSMutableArray *searchResults;

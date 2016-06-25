@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *latitude;
 @property (nullable, nonatomic, retain) NSString *longitude;
 @property (nullable, nonatomic, retain) NSString *name;
-@property (nullable, nonatomic, retain) DBImage *image;
+@property (nullable, nonatomic, retain) NSSet<DBImage *> *images;
 @property (nullable, nonatomic, retain) NSSet<DBUser *> *users;
 
 @end
@@ -35,6 +35,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeUsersObject:(DBUser *)value;
 - (void)addUsers:(NSSet<DBUser *> *)values;
 - (void)removeUsers:(NSSet<DBUser *> *)values;
+
+- (void)addImagesObject:(DBImage *)value;
+- (void)removeImagesObject:(DBImage *)value;
+- (void)addImages:(NSSet<DBImage *> *)values;
+- (void)removeImages:(NSSet<DBImage *> *)values;
 
 @end
 

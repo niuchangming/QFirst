@@ -10,13 +10,13 @@
         <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="image" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DBImage" inverseName="clinic" inverseEntity="DBImage" syncable="YES"/>
+        <relationship name="images" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DBImage" inverseName="clinic" inverseEntity="DBImage" syncable="YES"/>
         <relationship name="users" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DBUser" inverseName="clinic" inverseEntity="DBUser" syncable="YES"/>
     </entity>
     <entity name="DBImage" representedClassName="DBImage" syncable="YES">
         <attribute name="entityId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="clinic" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBClinic" inverseName="image" inverseEntity="DBClinic" syncable="YES"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBUser" inverseName="image" inverseEntity="DBUser" syncable="YES"/>
+        <relationship name="clinic" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBClinic" inverseName="images" inverseEntity="DBClinic" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBUser" inverseName="images" inverseEntity="DBUser" syncable="YES"/>
     </entity>
     <entity name="DBUser" representedClassName="DBUser" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
@@ -27,7 +27,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="role" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="clinic" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBClinic" inverseName="users" inverseEntity="DBClinic" syncable="YES"/>
-        <relationship name="image" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DBImage" inverseName="user" inverseEntity="DBImage" syncable="YES"/>
+        <relationship name="images" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DBImage" inverseName="user" inverseEntity="DBImage" syncable="YES"/>
     </entity>
     <elements>
         <element name="DBClinic" positionX="0" positionY="0" width="128" height="210"/>

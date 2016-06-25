@@ -25,6 +25,7 @@
     if(self){
         self.entityId = [NSNumber numberWithInt:[[dic valueForKey:@"entityId"] intValue]];
         self.name = [dic valueForKey:@"name"];
+        self.contact = [dic valueForKey:@"contact"];
         self.address = [dic valueForKey:@"address"];
         self.desc = [dic valueForKey:@"description"];
         self.isCoop = [dic valueForKey:@"isCooperated"];
@@ -33,8 +34,12 @@
         self.isBookmark = @NO;
         
         NSArray *imageArray = [dic valueForKey:@"images"];
+        self.images = [[NSSet alloc] init];
         if(![Utils IsEmpty:imageArray] && imageArray.count > 0){
-            self.image = [[DBImage alloc] initWithJson:[imageArray objectAtIndex:0]];
+            for(NSDictionary *imageDic in imageArray) {
+                DBImage *dbImage = [[DBImage alloc] initWithJson:imageDic];
+                [self addImagesObject:dbImage];
+            }
         }
         
         NSArray *doctorArray = [dic valueForKey:@"doctors"];

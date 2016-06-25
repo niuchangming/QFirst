@@ -11,6 +11,7 @@
 #import "Utils.h"
 #import "ConstantValues.h"
 #import "DBClinic.h"
+#import "DBImage.h"
 #import <QuartzCore/QuartzCore.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "BookmarkSearchResultTableViewController.h"
@@ -30,14 +31,14 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
-    self.tableView.emptyDataSetSource = self;
-    self.tableView.emptyDataSetDelegate = self;
-    self.tableView.tableFooterView = [UIView new];
+    self.bookmarkClinicTB.emptyDataSetSource = self;
+    self.bookmarkClinicTB.emptyDataSetDelegate = self;
+    self.bookmarkClinicTB.tableFooterView = [UIView new];
     
-    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
-        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+    if ([self.bookmarkClinicTB respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.bookmarkClinicTB setLayoutMargins:UIEdgeInsetsZero];
     }
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.bookmarkClinicTB.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     [self initSearchBarController];
 }
@@ -51,7 +52,7 @@
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:searchResultsController];
     self.searchController.searchResultsUpdater = self;
     self.searchController.searchBar.frame = CGRectMake(self.searchController.searchBar.frame.origin.x, self.searchController.searchBar.frame.origin.y, self.searchController.searchBar.frame.size.width, 44.0);
-    self.tableView.tableHeaderView = self.searchController.searchBar;
+    self.bookmarkClinicTB.tableHeaderView = self.searchController.searchBar;
     self.definesPresentationContext = YES;
 }
 
@@ -59,7 +60,7 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isBookmark = %@", [NSNumber numberWithBool:YES]];
     self.bookmarkClinics = [DBClinic retrieveBy:predicate];
     self.searchResults = [NSMutableArray arrayWithCapacity:[self.bookmarkClinics count]];
-    [self.tableView reloadData];
+    [self.bookmarkClinicTB reloadData];
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -75,7 +76,11 @@
     }
     
     UIImageView *clinicLogoIv = (UIImageView *)[cell viewWithTag:1];
-    [clinicLogoIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ClinicController/showClinicThumbnailLogo?id=%@", baseUrl, [[self.bookmarkClinics objectAtIndex:indexPath.row] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    if([[[self.bookmarkClinics objectAtIndex:indexPath.row] images] count] > 0){
+        [clinicLogoIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ClinicController/showClinicThumbnailLogo?id=%@", baseUrl, [[[[[self.bookmarkClinics objectAtIndex:indexPath.row] images] allObjects] objectAtIndex:0] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    }else{
+        [clinicLogoIv setImage:[UIImage imageNamed:@"default_avatar"]];
+    }
     
     clinicLogoIv.layer.cornerRadius = clinicLogoIv.frame.size.width / 2;
     clinicLogoIv.clipsToBounds = YES;
@@ -101,9 +106,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     [[self.bookmarkClinics objectAtIndex:indexPath.row] setIsBookmark:[NSNumber numberWithBool:FALSE]];
     [self.bookmarkClinics removeObjectAtIndex:indexPath.row];
-    [self.tableView reloadData];
+    [self.bookmarkClinicTB reloadData];
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate saveContext];
@@ -150,7 +156,6 @@
     [self updateSearchResultsForSearchController:self.searchController];
 }
 
-
 #pragma mark - Content Filtering
 
 - (void)updateFilteredContentForClinic:(NSString *)name{
@@ -172,7 +177,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"segue_clinicdetail_bookmark"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSIndexPath *indexPath = [self.bookmarkClinicTB indexPathForSelectedRow];
         ClinicDetailViewController *clinicDetailVC = segue.destinationViewController;
         clinicDetailVC.clinic = [self.bookmarkClinics objectAtIndex:indexPath.row];
     }
@@ -180,7 +185,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

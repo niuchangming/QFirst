@@ -17,5 +17,5 @@
 
 extern NSString * const baseUrl;
 extern NSString * const GOOGLE_MAP_KEY;
-
+extern NSString * const NOTIFY_USER_INFO_UPDATE;
 @end
