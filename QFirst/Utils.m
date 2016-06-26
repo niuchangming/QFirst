@@ -111,6 +111,30 @@
     return name;
 }
 
++ (NSString*) reserMobile{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString * mobile = [Utils IsEmpty:[defaults objectForKey:@"reserv_mobile"]] ? @"" : [defaults objectForKey:@"reserv_mobile"];
+    return mobile;
+}
+
++ (NSString*) reserIc{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString * ic = [Utils IsEmpty:[defaults objectForKey:@"reserv_ic"]] ? @"" : [defaults objectForKey:@"reserv_ic"];
+    return ic;
+}
+
++ (NSString*) reserEmail{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString * email = [Utils IsEmpty:[defaults objectForKey:@"reserv_email"]] ? @"" : [defaults objectForKey:@"reserv_email"];
+    return email;
+}
+
++ (NSString*) reserName{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString * name = [Utils IsEmpty:[defaults objectForKey:@"reserv_name"]] ? @"" : [defaults objectForKey:@"reserv_name"];
+    return name;
+}
+
 + (NSString *) getDateStringByDate: (NSDate*) date{
     NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
     [dateFormater setDateFormat:@"yyyy-MM-dd"];

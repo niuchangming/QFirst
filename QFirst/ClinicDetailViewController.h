@@ -11,10 +11,11 @@
 #import <MapKit/MKAnnotation.h>
 #import "DBClinic.h"
 #import "DBUser.h"
-#import "LoginViewController.h"
+#import "LoginViewController.h"åå
+#import "DoctorDetailViewController.h"
 #import "MozTopAlertView.h"
 
-@interface ClinicDetailViewController : UIViewController<MKMapViewDelegate,  CLLocationManagerDelegate, UIAlertViewDelegate, LoginViewControllerDelegate>
+@interface ClinicDetailViewController : UIViewController<MKMapViewDelegate,  CLLocationManagerDelegate, UIAlertViewDelegate, LoginViewControllerDelegate, ReserveDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *clincInfoCell;

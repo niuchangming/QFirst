@@ -20,6 +20,7 @@
 @interface DoctorDetailViewController (){
     int next;
     int doctorIndex;
+    bool enableSave;
     NSTimeInterval day;
     NSArray *doctors;
     NSMutableDictionary *reservationMap;
@@ -73,10 +74,15 @@
         }
     }
     
-    self.nameTf.text = [Utils name];
-    self.phoneTf.text = [Utils mobile];
-    self.iCard.text = [Utils ic];
-    self.emailTf.text = [Utils email];
+    [self.nameTf addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.phoneTf addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.iCard addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.emailTf addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
+    self.nameTf.text = [Utils IsEmpty:[Utils reserName]] ? [Utils name] : [Utils reserName];
+    self.phoneTf.text = [Utils IsEmpty:[Utils reserMobile]] ? [Utils mobile] : [Utils reserMobile];
+    self.iCard.text = [Utils IsEmpty:[Utils reserIc]] ? [Utils ic] : [Utils reserIc];
+    self.emailTf.text = [Utils IsEmpty:[Utils reserEmail]] ? [Utils email] : [Utils reserEmail];
 }
 
 -(void) viewDidLayoutSubviews{
@@ -257,6 +263,10 @@
         [self login];
     }else{
         [self submitReservation];
+        
+        if(enableSave){
+            [self storeReservationInfo];
+        }
     }
 }
 
@@ -305,6 +315,10 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFY_USER_INFO_UPDATE object:nil userInfo:nil];
 }
 
+-(void) textFieldDidChange:(UITextField *) textField{
+    enableSave = true;
+}
+
 -(void) login{
     [self performSegueWithIdentifier:@"segue_login_doctor_detail" sender:nil];
 }
@@ -320,6 +334,15 @@
     if(![Utils IsEmpty:err]){
         [MozTopAlertView showWithType:MozAlertTypeError text:err doText:nil doBlock:nil parentView:self.view];
     }
+}
+
+-(void) storeReservationInfo{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:self.phoneTf.text forKey:@"reserv_mobile"];
+    [defaults setObject:self.nameTf.text forKey:@"reserv_name"];
+    [defaults setObject:self.iCard.text forKey:@"reserv_ic"];
+    [defaults setObject:self.emailTf.text forKey:@"reserv_email"];
+    [defaults synchronize];
 }
 
 - (void)didReceiveMemoryWarning {

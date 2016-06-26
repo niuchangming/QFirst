@@ -22,9 +22,35 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self.window makeKeyAndVisible];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    bool hideIntro = [defaults boolForKey:@"hide_intro"];
+    
+    if(!hideIntro){
+        [self startIntroPage];
+        
+        [defaults setBool:true forKey:@"hide_intro"];
+        [defaults synchronize];
+    }
+    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSLog(@"-----> %@",[paths objectAtIndex:0]);
     return YES;
+}
+
+-(void) startIntroPage{
+    NSArray *coverImageNames = @[@"intro_desc_01", @"intro_desc_01", @"intro_desc_03"];
+    NSArray *backgroundImageNames = @[@"intro_1", @"intro_2", @"intro_3"];
+    
+    self.introductionViewController = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames];
+    
+    [self.window addSubview:self.introductionViewController.view];
+    
+    __weak AppDelegate *weakSelf = self;
+    self.introductionViewController.didSelectedEnter = ^() {
+        weakSelf.introductionViewController = nil;
+    };
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

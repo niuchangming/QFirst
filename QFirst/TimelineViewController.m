@@ -305,6 +305,8 @@
             Reservation *reservation = [[Reservation alloc]initWithJson:data];
             [reservationMap setObject:reservation forKey:[Utils getTimeString:reservation.reservationDatetime]];
             [self.timetable reloadData];
+            
+            [MozTopAlertView showWithType:MozAlertTypeSuccess text:@"Reserve successfully." doText:nil doBlock:nil parentView:self.view];
         }
     }
 }

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ZWIntroductionViewController/ZWIntroductionViewController.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -15,6 +16,8 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
+@property (strong, nonatomic) ZWIntroductionViewController *introductionViewController;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

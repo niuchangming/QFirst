@@ -31,6 +31,15 @@
 
 + (NSString*) name;
 
++ (NSString*) reserMobile;
+
++ (NSString*) reserIc;
+
++ (NSString*) reserEmail;
+
++ (NSString*) reserName;
+
+
 + (BOOL)isValidEmail:(NSString *) emailStr;
 
 + (BOOL)isNumber:(NSString *)string;
